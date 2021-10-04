@@ -1,0 +1,125 @@
+body {
+  font-size: 17px;
+  background-color: #ccc;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff
+}
+
+.placeholder {
+  width: 100%;
+  min-height: 460px;
+  background-color: #556E5B;
+}
+
+.header {
+  color: white;
+  min-height: 460px;
+  background: transparent;
+  position: relative;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.header-inner {
+  padding: 40px 50px;
+}
+
+.header-side {
+  margin-top: 100px;
+  font-size: 1.7rem;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.nav-bar {
+  text-align: right;
+  margin-top: 30px;
+}
+
+.nav-ul {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-li {
+  list-style: none;
+  display: block;
+  margin-bottom: 0;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding-bottom: 10px;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  border-bottom: 1px solid white;
+}
+
+.tm-gallery-page {
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.tm-gallery-description {
+  font-size: 0.95rem;
+}
+
+@media (min-width: 576px) {
+  .tm-gallery-page {
+    max-width: 560px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .tm-gallery-page,
+  .tm-section,
+  .tm-container-inner,
+  .tm-container-inner-2 {
+    max-width: 840px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .tm-gallery-page,
+  .tm-section {
+    max-width: 1120px;
+  }
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.tm-gallery-img {
+  margin-bottom: 20px;
+}
+
+.NoCoffee {
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    margin-left: 115px;
+}
