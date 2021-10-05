@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 , shrink-to-fit=no">
     <!-- Title -->
-    <title>TO DO</title>
+    <title>Registration - TY</title>
     <!-- Goolge fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,38 +25,47 @@
     <!-- Begin Body content
 	================================================== -->
     <main>
-        <div class="form">
-            <form class="register">
+        <div class="form-container">
+            <form class="registration-form">
                 <div>
                     <h3>Create New Account</h3>
                 </div>
-                <div>
+                <div class="form-group-lable-and-input">
                     <label>User Name </label>
                     <input type="text" id="name"></input>
                 </div>
-                <div>
+                <div class="form-group-lable-and-input">
                     <label>Email </label>
                     <input type="text" id="email"></input>
                 </div>
-                <div>
+                <div class="form-group-lable-and-input">
                     <label>Password </label>
                     <input type="password" id="password"></input>
                 </div>
-                <div>
+                <div class="form-group-lable-and-input">
                     <label>Comfirm Password </label>
                     <input type="password" id="confirmPassword"></input>
                 </div>
-                <div>
+                <div class="form-group-lable-and-input">
                     <label>Country </label>
                     <select class="select-box">
                         <option key="Canada" value="Canada">Canada</option>
                         <option key="USA" value="USA">USA</option>
                     </select>
                 </div>
-                <div class="button">
-                    <input type="button" value="Submit">
-                    <p class="message">Already have account? <a
-                            href="/4ww3project/part_1/user_registration.html">&nbsp;Log in</a></p>
+                <div class="form-group-lable-and-input">
+                    <div id="user-agreement">
+                        <input class="checkbox" type="checkbox" value="user-agreement">
+                        Check here to indicate that you have read and agree to TY's
+                        <a class="legal-link" href="/4ww3project/part_1/#">terms of Service </a> "nd acknowledge TY's
+                        <a class="legal-link" href="/4ww3project/part_1/#"> Privacy Policy </a>.
+                    </div>
+                </div>
+
+                <div>
+                    <input class="btn" type="button" value="Submit">
+                    <p class="message">Already have account? <a href="/4ww3project/part_1/registration.html">&nbsp;Log
+                            in</a></p>
                 </div>
             </form>
         </div>
