@@ -73,8 +73,7 @@ footer {
 }
 
 /* select box */
-.form-container .select-box {
-  width: 100%;
+.form-container {
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 16px;
@@ -152,7 +151,7 @@ textarea {
     margin: auto;
     height: auto;
   }
- 
+
   #container-coffee-shop{
     width: 100%;
     margin-left: auto;
