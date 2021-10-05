@@ -71,9 +71,54 @@ body {
 }
 
 .title {
-  font-size: 2.2rem;
-  font-weight: 800;
+  font-size: 2.7rem;
+  font-weight: 900;
   margin-bottom: 5px;
+}
+
+.obj-container {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+  display: flex;
+  flex-direction:row;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.objects {
+  width: 33%;
+  height: 33%;
+  text-align: center;
+}
+
+.sample-img {
+  text-align: center;
+  width:70%;
+  height: 70%;
+}
+
+.des-title {
+  color: #1A6692;
+  font-size: 1.5rem;
+  margin: auto;
+}
+
+.des-text {
+  margin: auto;
+  padding: 15px;
+}
+
+.des-price {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #1A6692;
+  margin: auto;
+  padding: 5px;
 }
 
 footer {
