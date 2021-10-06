@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 , shrink-to-fit=no">
     <!-- Title -->
-    <title>Individual Coffee Shop - TY</title>
+    <title>Individual Coffee Shop</title>
     <!-- Goolge fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,75 +14,99 @@
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <!-- External style -->
+    <link rel="stylesheet" href="assets/css/index-style.css">
     <link rel="stylesheet" href="assets/css/user_registration.css">
 </head>
 
 <body>
-    <header>
-        <div id="header">
-            This is header
+    <!-- Begin Header and menue
+	================================================== -->
+    <div class="container">
+        <div class="placeholder">
+            <div class="header"
+                style="background-image: url('img/title-pic copy.jpg'); background-repeat: no-repeat;" />
+            <div class="header-inner">
+                <div class="header-side">
+                    <h1 class="header-side-title">Seek Coffee</h1>
+                    <h6 class="header-side-description">find your coffee shop</h6>
+                </div>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav-ul">
+                    <li class="nav-li"><a href="index.html" class="nav-link active">Home</a></li>
+                    <li class="nav-li"><a href="submission.html" class="nav-link">Submission</a></li>
+                    <li class="nav-li"><a href="registration.html" class="nav-link">Login</a></li>
+                    <li class="nav-li"><a href="search.html" class="nav-link">Search</a></li>
+                </ul>
+            </nav>
         </div>
-    </header>
+    </div>
+    <!-- End Header and menue
+	================================================== -->
 
     <!-- Begin Body content
 	================================================== -->
     <main>
-        <div id="container-coffee-shop">
-            <!-- Coffee shop img as a backgroud on the top the boy content -->
-            <div class="coffee-shop-background-img"></div>
-            <!-- Coffee shop information, including coffee shop name, description, ratings and the number of reviews -->
-            <div class="coffee-shop-overall-info">
-                <!-- a div for coffee shop name -->
-                <div>
-                    <div class="coffee-shop-name">Hometown Coffee </div>
+        <div class="individual-obj-container">
+            <div>
+                <!-- img with creative comons license, from https://images.app.goo.gl/y3xtUHUSn13LiotM8 -->
+                <div class="coffee-shop-img">
+                    <img src="img/coffee-shop-1.jpg" width="100%" alt="Coffee Shop">
                 </div>
-                <!-- a div for desription -->
-                <div>
-                    <strong>Description: </strong>A great coffee shop in Hamilton downtown
-                </div>
-                <!-- a div for rating and the overal number of reivews -->
-                <div class="flex-left">
-                    <div class="rating">
-                        <!-- a star icon with filling -->
-                        <span>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </span>
-                        <span>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </span>
-                        <span>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </span>
-                        <span>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </span>
-                        <!-- a star icon with half filling -->
-                        <span>
-                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                        </span>
+
+                <!-- Coffee shop information, including coffee shop name, description, ratings and the number of reviews -->
+                <div class="coffee-shop-overall-info margin-left-10">
+                    <!-- a div for coffee shop name -->
+                    <div>
+                        <div class="coffee-shop-name">Hometown Coffee </div>
                     </div>
-                    <div class="margin-bottom-20">
-                        &nbsp;&nbsp;<strong>3 reviews</strong>
+                    <!-- a div for desription -->
+                    <div>
+                        <strong>Description: </strong>A great coffee shop in Hamilton downtown
+                    </div>
+                    <!-- a div for rating and the overal number of reivews -->
+                    <div class="flex-left">
+                        <div class="rating">
+                            <!-- a star icon with filling -->
+                            <span>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </span>
+                            <span>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </span>
+                            <span>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </span>
+                            <span>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </span>
+                            <!-- a star icon with half filling -->
+                            <span>
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="margin-bottom-20">
+                            &nbsp;&nbsp;<strong>3 reviews</strong>
+                        </div>
+                    </div>
+                    <!-- Add review button -->
+                    <div class="btn-icon-and-text margin-bottom-20 btn">
+                        <div><i class="fa fa-star-o"></i> Write a Review</div>
                     </div>
                 </div>
-            </div>
-            <!-- Add review button -->
-            <div class="btn-icon-and-text margin-bottom-20 btn">
-                <div><i class="fa fa-star-o"></i> Write a Review</div>
             </div>
             <hr>
             <!-- Map and location -->
             <div>
-                <h1>Location</h1>
-                <div class="individual-location">
-                    <div class="map">
-                        <img src="assets/img/map-img.png" width = "315px" heigh="160px" alt="Map">
-                    </div>
+                <h1 class="margin-left-10">Location</h1>
+                <!-- img with screenshot from goole map -->
+                <div class="individual-map">
+                    <img src="img/map-img.png" width="100%" alt="Map">
                 </div>
             </div>
             <hr />
             <!-- Review section -->
-            <div class="review-lists">
+            <div class="review-lists margin-left-10">
                 <h1>Reviews</h1>
                 <!-- first individual review, contains reviewer's name, rating, date and comments -->
                 <div class="row margin-bottom-20">
@@ -183,9 +207,9 @@
     <!-- Begin Footer
 	================================================== -->
     <footer>
-        <div id="footer">
-            This is footer
-        </div>
+        <hr>
+        <p>Page created by: Haoyang Tao, Fang Ye</p>
+        <p>Contact information: <a href="mailto:taoh4@mcmaster.ca">click this</a>.</p>
     </footer>
     <!-- End Footer
 	================================================== -->
