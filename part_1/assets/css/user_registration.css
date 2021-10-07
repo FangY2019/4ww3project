@@ -109,8 +109,16 @@ textarea {
   width: 50%;
 }
 
+.coffee-shop-img img {
+  width: 100%;
+}
+
 .individual-map{
   width: 50%;
+}
+
+.individual-map img {
+  width: 100%;
 }
 
 .btn-icon-and-text {
