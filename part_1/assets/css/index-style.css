@@ -115,7 +115,8 @@ body {
 }
 
 .rating-container {
-  padding: 100px;
+  text-align: center;
+  padding-bottom: 15px;
 }
 
 .end-of-page {
