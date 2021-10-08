@@ -12,9 +12,9 @@ http://3.142.111.3/4ww3project/part_1/
 
 ### c. Notes
 
-**Add-on 1 task 1 and task 2 were completed**
+**1. Add-on 1 task 1 and task 2 were completed**
 
-**Task 2 Ansers**
+**2. Task 2 Answers**
 
 i):   
 There are three images in total: small, medium and large. For smaller device, larger image is cropped to smaller size.
