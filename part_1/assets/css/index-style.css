@@ -6,6 +6,7 @@ body {
   display: block;
 }
 
+/* A container that includes all the divs of the page */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -14,6 +15,7 @@ body {
   background-color: #fff
 }
 
+/* header */
 .placeholder {
   width: 100%;
   min-height: 460px;
@@ -38,6 +40,7 @@ body {
   margin-bottom: 5px;
 }
 
+/* navigation section */
 .nav-bar {
   text-align: right;
   margin-top: 30px;
@@ -67,6 +70,7 @@ body {
   border-bottom: 1px solid white;
 }
 
+/* welcome section */
 .welcome-section {
   text-align: center;
 }
@@ -82,6 +86,7 @@ body {
   color: #1A6692;
 }
 
+/* a container that includes all the flex objects */
 .obj-container {
   margin-top: 50px;
   width: 100%;
@@ -96,6 +101,7 @@ body {
   flex-wrap: wrap;
 }
 
+/* a container that includes all the flex objects in search page*/
 .search-obj-container {
   margin-top: 50px;
   width: 100%;
@@ -136,6 +142,7 @@ body {
   height: 70%;
 }
 
+/* Medium devices (992px wide or less) */
 @media (max-width: 992px) {
   .objects {
     width: 100%;
@@ -164,6 +171,7 @@ body {
   }
 }
 
+/* Small devices (400px wide or less) */
 @media (max-width: 400px) {
   .objects {
     width: 100%;
@@ -176,6 +184,7 @@ body {
   }
 }
 
+/* object description */
 .des-title {
   color: #1A6692;
   font-size: 1.5rem;
@@ -187,62 +196,17 @@ body {
   padding: 15px;
 }
 
+/* rating */
 .rating-container {
   text-align: center;
   padding-bottom: 20px;
 }
 
+/* end of page */
 .end-of-page {
+  margin-top: 90px;
   text-align: center;
   font-size: 3rem;
-}
-
-.nocoffee-img {
-  padding: 15px;
-  height: 33%;
-  width: 33%;
-}
-
-.btn{
-  background-color: #556E5B;
-  color: white;
-  font-weight: bolder;
-}
-
-.btn:hover{
-  background-color: #556E5B;
-}
-
-.form-container label {
-  font-size: 16px;
-}
-
-.form-container input {
-  width: 100%;
-  border: #9e9e9e 1px solid;
-  border-radius: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-.form-container {
-  width: 30%;
-  margin: auto;
-  height: auto;
-}
-
-.form-container h3 {
-  color: black;
-  text-align: center;
-  padding: 20px;
-  font-size: 25px;
-}
-
-.form-group-lable-and-input {
-  text-align: left;
-  margin-top: 20px;
-  margin-bottom: 10px;
 }
 
 footer {

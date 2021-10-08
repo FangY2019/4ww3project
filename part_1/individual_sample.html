@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    <!-- Begin Header and menue
+    <!-- Begin Header and menu
 	================================================== -->
     <div class="container">
         <div class="placeholder">
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <!-- End Header and menue
+    <!-- End Header and menu
 	================================================== -->
 
     <!-- Begin Body content
@@ -71,7 +71,15 @@
                 <div>
                     <!-- img with creative comons license, from https://images.app.goo.gl/y3xtUHUSn13LiotM8 -->
                     <div class="coffee-shop-img">
-                        <img src="img/coffee-shop-1.jpg" alt="Coffee Shop">
+                        <picture>
+                          <source
+                            srcset="img/coffee-shop-1-sma.jpg 320w,
+                                    img/coffee-shop-1-mid.jpg 800w,
+                                    img/coffee-shop-1.jpg 1200w"
+                            sizes="(min-width: 60rem) 80vw,
+                                   (min-width: 40rem) 90vw, 100vw">
+                          <img src="img/coffee-shop-1-sma.jpg" alt="Coffee Shop"/>
+                      </picture>
                     </div>
                     <!-- Video provided by Videvo, downloaded from www.videvo.net  -->
                     <div class="coffee-shop-video">
