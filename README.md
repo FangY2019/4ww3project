@@ -13,16 +13,16 @@ http://3.142.111.3/4ww3project/part_1/
 ### c. Notes
 2.  
 i):   
-There are three images in total: small, medium and large. For smaller device, larger image is cropped to smaller size.
-`<picture>
-  <source
-    srcset="img/coffee-shop-1-sma.jpg 320w,
-            img/coffee-shop-1-mid.jpg 800w,
-            img/coffee-shop-1.jpg 1200w"
-    sizes="(min-width: 60rem) 80vw,
-           (min-width: 40rem) 90vw, 100vw">
-  <img src="img/coffee-shop-1-sma.jpg" alt="Coffee Shop"/>
-</picture>`
+There are three images in total: small, medium and large. For smaller device, larger image is cropped to smaller size.  
+<picture>  
+  <source  
+    srcset="img/coffee-shop-1-sma.jpg 320w,  
+            img/coffee-shop-1-mid.jpg 800w,  
+            img/coffee-shop-1.jpg 1200w"  
+    sizes="(min-width: 60rem) 80vw,  
+           (min-width: 40rem) 90vw, 100vw">  
+  <img src="img/coffee-shop-1-sma.jpg" alt="Coffee Shop"/>  
+</picture>  
 
 ii):  
 1. It makes responsive display much easier and flexible.
