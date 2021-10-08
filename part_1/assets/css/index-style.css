@@ -150,7 +150,7 @@ body {
   }
 
   .nav-bar {
-    margin-top: 0px;
+    margin-top: 80px;
   }
 
   .nav-ul {
@@ -161,6 +161,18 @@ body {
 
   .nav-li {
     padding: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .objects {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+
+  .nav-bar {
+    margin-top: 0px;
   }
 }
 
