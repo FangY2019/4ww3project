@@ -70,6 +70,26 @@ body {
   border-bottom: 1px solid white;
 }
 
+/* button */
+.btn {
+  background-color: #556E5B;
+  color: white;
+  font-weight: bolder;
+}
+
+.btn:hover {
+  background-color: #26472e;
+}
+
+/* rating */
+.rating i {
+  margin: 0;
+  color: #ff9800;
+  vertical-align: middle;
+  align-items: center;
+  font-size: 20px;
+}
+
 /* welcome section */
 .welcome-section {
   text-align: center;
@@ -142,8 +162,196 @@ body {
   height: 70%;
 }
 
+/* form */
+.form-container {
+  width: 30%;
+  margin: auto;
+  height: auto;
+}
+
+.form-container h3 {
+  color: black;
+  text-align: center;
+  padding: 20px;
+  font-size: 25px;
+}
+
+.form-group-lable-and-input {
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.form-container label {
+  font-size: 16px;
+}
+
+.form-container input {
+  width: 100%;
+  border: #9e9e9e 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* select box */
+.form-container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+}
+
+/* checkbox */
+input[type='checkbox'] {
+  float: left;
+  width: 20px;
+}
+
+/*  submission page  */
+/* checkbox */
+input[type='file'] {
+  border: none;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.flex-left {
+  display: flex;
+}
+
+/*  individual sample page */
+.individual-obj-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px
+}
+
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+.coffee-shop-name {
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.coffee-shop-img {
+  width: 50%;
+  float: left;
+}
+
+.coffee-shop-video {
+  width: 50%;
+  float: left;
+}
+
+.coffee-shop-img img {
+  width: 100%;
+}
+
+.individual-map{
+  width: 50%;
+  float: left;
+}
+
+.individual-map img {
+  width: 100%;
+}
+
+.fix{
+  clear: both;
+}
+
+.hours{ 
+  text-align: center;
+  font-size: larger;
+  padding-top: 20px;
+  width: 50%;
+  float: left;
+}
+
+.btn-icon-and-text {
+  width: 150px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+/* object description */
+.des-title {
+  color: #1A6692;
+  font-size: 1.5rem;
+  margin: auto;
+}
+
+.des-text {
+  margin: auto;
+  padding: 15px;
+}
+
+/* rating */
+.rating-container {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+/* end of page */
+.end-of-page {
+  margin-top: 90px;
+  text-align: center;
+  font-size: 3rem;
+}
+
+footer {
+  text-align: center;
+}
+
 /* Medium devices (992px wide or less) */
 @media (max-width: 992px) {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-container {
+    width: 80%;
+    margin: auto;
+    height: auto;
+    /* background-color: #92897b; */
+  }
+
+  .individual-obj-container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .coffee-shop-img {
+    width: 100%;
+  }
+
+  .coffee-shop-video {
+    width: 100%;
+    margin-top: 0px;
+  }
+
+  .individual-map{
+    width: 100%;
+  }
+
+  .hours{
+    width: 100%;
+  }
+
   .objects {
     width: 100%;
     height: 100%;
@@ -184,31 +392,4 @@ body {
   }
 }
 
-/* object description */
-.des-title {
-  color: #1A6692;
-  font-size: 1.5rem;
-  margin: auto;
-}
 
-.des-text {
-  margin: auto;
-  padding: 15px;
-}
-
-/* rating */
-.rating-container {
-  text-align: center;
-  padding-bottom: 20px;
-}
-
-/* end of page */
-.end-of-page {
-  margin-top: 90px;
-  text-align: center;
-  font-size: 3rem;
-}
-
-footer {
-  text-align: center;
-}

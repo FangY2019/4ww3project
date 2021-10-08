@@ -2,93 +2,98 @@
 <html>
 
 <head>
-	<!-- Meta -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0 , shrink-to-fit=no">
-	<!-- Title -->
-	<title>Individual Coffee Shop</title>
-	<!-- Goolge fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-	<!-- font awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<!-- External style -->
-	<link rel="stylesheet" href="assets/css/index-style.css">
-	<link rel="stylesheet" href="assets/css/user_registration.css">
+  <!-- Meta tags-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable = no">
+  <!-- Metadata for mobile user saves the page -->
+  <title>Search - Seek Coffee</title>
+  <link rel="apple-touch-icon-precomposed" href="img/icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="192x192" href="img/icon.png">
+  <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>    -->
+  <!-- Goolge fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- External style -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-	<!-- Begin Header and menu
+  <!-- Begin Header and menu
 ================================================== -->
   <div class="container">
     <div class="placeholder">
-      <div class="header" style="background-image: url('img/title-pic copy.jpg'); background-repeat: no-repeat;"/>
-        <div class="header-inner">
-          <div class="header-side">
-            <h1 class="header-side-title">Seek Coffee</h1>
-            <h6 class="header-side-description">find your coffee shop</h6>
-          </div>
+      <div class="header" style="background-image: url('img/title-pic copy.jpg'); background-repeat: no-repeat;" />
+      <div class="header-inner">
+        <div class="header-side">
+          <h1 class="header-side-title">Seek Coffee</h1>
+          <h6 class="header-side-description">find your coffee shop</h6>
         </div>
-        <nav class="nav-bar">
-          <ul class="nav-ul">
-            <li class="nav-li"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-li"><a href="submission.html" class="nav-link">Submission</a></li>
-            <li class="nav-li"><a href="registration.html" class="nav-link">Registration</a></li>
-						<li class="nav-li"><a class="nav-link">Login</a></li>
-            <li class="nav-li"><a href="search.html" class="nav-link active">Search</a></li>
-          </ul>
-        </nav>
       </div>
+      <nav class="nav-bar">
+        <ul class="nav-ul">
+          <li class="nav-li"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-li"><a href="submission.html" class="nav-link">Submission</a></li>
+          <li class="nav-li"><a href="registration.html" class="nav-link">Registration</a></li>
+          <li class="nav-li"><a class="nav-link">Login</a></li>
+          <li class="nav-li"><a href="search.html" class="nav-link active">Search</a></li>
+        </ul>
+      </nav>
     </div>
-		<!-- End Header and menu
+  </div>
+  <!-- End Header and menu
 	================================================== -->
 
-    <main>
-        <div class="form-container">
-            <form class="registration-form">
-                <div>
-                    <h3>Search!</h3>
-                </div>
-                <div class="search-bar">
-                    <label>Name: </label>
-                    <input type="text" id="name"></input>
-                </div>
-
-								<!-- Drop down menu, filter of stars
-							================================================== -->
-                <div class="form-group-lable-and-input">
-                    <label>Stars: </label>
-                    <select class="select-box">
-                        <option key="1" value="1">1</option>
-                        <option key="2" value="2">2</option>
-                        <option key="3" value="3">3</option>
-                        <option key="4" value="4">4</option>
-                        <option key="5" value="5">5</option>
-                    </select>
-                </div>
-
-								<!-- search button
-							================================================== -->
-                <div>
-                  <a href="results_sample.html">
-                    <input class="btn" type="button" value="Search">
-                  </a>
-                </div>
-            </form>
+  <main>
+    <div class="form-container">
+      <form class="registration-form">
+        <div>
+          <h3>Search!</h3>
+        </div>
+        <div class="search-bar">
+          <label>Name: </label>
+          <input type="text" id="name"></input>
         </div>
 
-    </main>
-    <div class="end-of-page">
-      <div class="end-of-page-text">
-        <p> Didn't find your loved one? <a href="submission.html">Add it!</a></p>
-      </div>
+        <!-- Drop down menu, filter of stars
+							================================================== -->
+        <div class="form-group-lable-and-input">
+          <label>Stars: </label>
+          <select class="select-box">
+            <option key="1" value="1">1</option>
+            <option key="2" value="2">2</option>
+            <option key="3" value="3">3</option>
+            <option key="4" value="4">4</option>
+            <option key="5" value="5">5</option>
+          </select>
+        </div>
+
+        <!-- search button
+							================================================== -->
+        <div>
+          <a href="results_sample.html">
+            <input class="btn" type="button" value="Search">
+          </a>
+        </div>
+      </form>
     </div>
 
-    <footer>
-      <hr>
-      <p>Page created by: Haoyang Tao, Fang Ye</p>
-      <p>Contact information: <a href="mailto:taoh4@mcmaster.ca">click this</a>.</p>
-    </footer>
+  </main>
+  <div class="end-of-page">
+    <div class="end-of-page-text">
+      <p> Didn't find your loved one? <a href="submission.html">Add it!</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <hr>
+    <p>Page created by: Haoyang Tao, Fang Ye</p>
+    <p>Contact information: <a href="mailto:taoh4@mcmaster.ca">click this</a>.</p>
+  </footer>
 </body>
+
 </html>
