@@ -84,6 +84,7 @@ textarea {
   display: flex;
 }
 
+
 /*                individual sample page       */
 .individual-obj-container {
   width: 100%;
@@ -107,6 +108,12 @@ textarea {
 
 .coffee-shop-img {
   width: 50%;
+  float: left;
+}
+
+.coffee-shop-video {
+  width: 50%;
+  float: left;
 }
 
 .coffee-shop-img img {
@@ -115,10 +122,23 @@ textarea {
 
 .individual-map{
   width: 50%;
+  float: left;
 }
 
 .individual-map img {
   width: 100%;
+}
+
+.fix{
+  clear: both;
+}
+
+.hours{ 
+  text-align: center;
+  font-size: larger;
+  padding-top: 20px;
+  width: 50%;
+  float: left;
 }
 
 .btn-icon-and-text {
@@ -127,6 +147,7 @@ textarea {
   padding: 10px;
   text-align: center;
 }
+
 
 /* Medium devices (992px wide or less) */
 @media (max-width: 992px) {
@@ -152,7 +173,16 @@ textarea {
     width: 100%;
   }
 
+  .coffee-shop-video {
+    width: 100%;
+    margin-top: 0px;
+  }
+
   .individual-map{
+    width: 100%;
+  }
+
+  .hours{
     width: 100%;
   }
 
