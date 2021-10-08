@@ -11,7 +11,12 @@ http://3.142.111.3/4ww3project/part_1/
 * Member 2: Haoyang TAO - 400171589
 
 ### c. Notes
-2.i):   
+
+**Add-on 1 task 1 and task 2 were completed**
+
+**Task 2 Ansers**
+
+i):   
 There are three images in total: small, medium and large. For smaller device, larger image is cropped to smaller size.
 ```
 <picture>
