@@ -7,8 +7,8 @@ http://3.142.111.3/4ww3project/part_1/
 
 ### b. Team Member
 * Group name: RandName();
-* Member 1: Fang Ye - 400273067
-* Member 2: Haoyang TAO - 400171589
+* Member 1: Fang Ye - yef10, 400273067
+* Member 2: Haoyang Tao - taoh4, 400171589
 
 ### c. Notes
 
