@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <!-- External style -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- External javascript -->
+    <script type="text/javascript" src="assets/js/form_validation_registration.js"></script>
 </head>
 
 <body>
@@ -50,27 +52,28 @@
         <!-- Begin Body content
 	================================================== -->
         <section>
-            <div class="form-container">
-                <form class="registration-form">
+            <div class="form-container" >
+                <form class="registration-form" id="form-registration" autocomplete="off" onsubmit="return validateRegistrationForm()">
                     <div>
                         <h3>Create New Account</h3>
                     </div>
                     <div class="form-group-lable-and-input">
                         <label>User Name </label>
-                        <input type="text" id="name">
+                        <input autocomplete="txt-username" type="text" id="txt-username" autofocus="">
                     </div>
                     <div class="form-group-lable-and-input">
                         <label>Email </label>
-                        <input type="text" id="email">
+                        <input autocomplete="txt-email" type="text" id="txt-email">
                     </div>
                     <div class="form-group-lable-and-input">
                         <label>Password </label>
-                        <input type="password" id="password">
+                        <input autocomplete="txt-password" type="password" id="txt-password">
                     </div>
                     <div class="form-group-lable-and-input">
                         <label>Comfirm Password </label>
-                        <input type="password" id="confirmPassword">
+                        <input autocomplete="txt-confirm-password" type="password" id="txt-confirm-password">
                     </div>
+                    <!-- a check box for choose the country -->
                     <div class="form-group-lable-and-input">
                         <label>Country </label>
                         <select class="select-box">
@@ -80,7 +83,7 @@
                     </div>
                     <div class="form-group-lable-and-input">
                         <div id="user-agreement">
-                            <input class="checkbox" type="checkbox" value="user-agreement">
+                            <input class="checkbox" type="checkbox" name="terms">
                             Check here to indicate that you have read and agree to TY's
                             <a class="legal-link" href="/4ww3project/part_2/#">terms of Service </a> "nd acknowledge
                             TY's
@@ -89,7 +92,7 @@
                     </div>
 
                     <div>
-                        <input class="btn" type="button" value="Submit">
+                        <input class="btn" type="submit" value="Submit">
                         <p class="message">Already have account? <a
                                 href="/4ww3project/part_2/registration.html">&nbsp;Log
                                 in</a></p>
