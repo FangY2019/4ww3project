@@ -20,11 +20,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <!-- External style -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style_part2.css">
     <!-- Facebook's Open Graph Protocol  -->
     <meta property="og:title" content="Durand Coffee" />
     <meta property="og:type" content="Website" />
-    <meta property="og:url" content="http://3.142.111.3/4ww3project/part_1/individual_sample.html" />
-    <meta property="og:image" content="http://3.142.111.3/4ww3project/part_1/img/coffee-shop-1.jpg" />
+    <meta property="og:url" content="http://3.142.111.3/4ww3project/part_2/individual_sample.html" />
+    <meta property="og:image" content="http://3.142.111.3/4ww3project/part_2/img/coffee-shop-1.jpg" />
     <meta property="og:site_name" content="Seek Coffee">
     <meta property="og:description" content="A great coffee shop in Hamilton downtown">
     <!-- Twitter summary card -->
@@ -32,10 +33,21 @@
     <meta name="twitter:site" content="@Seek Coffee" />
     <meta name="twitter:title" content="Durand Coffee" />
     <meta name="twitter:description" content="A great coffee shop in Hamilton downtown." />
-    <meta name="twitter:image" content="http://3.142.111.3/4ww3project/part_1/img/coffee-shop-1.jpg" />
+    <meta name="twitter:image" content="http://3.142.111.3/4ww3project/part_2/img/coffee-shop-1.jpg" />
+    <!-- Leaflet CSS file -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+   <!-- Leaflet JavaScript file -->
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+   <!-- External JavaScript file -->
+   <script type="text/javascript" src="assets/js/map.js"></script>
+
 </head>
 
-<body>    
+<body onload="loadMap();">    
     <div class="container">
         <!-- Begin Header and menu
 	================================================== -->
@@ -133,14 +145,12 @@
                     <div class="location-and-hours">
                         <!-- Place microdata  -->
                         <div class="individual-map" itemscope itemtype="https://schema.org/Place">
-                            <!-- img with screenshot from goole map -->
-                            <div>
-                                <img src="img/map-img.png" alt="Map">
-                            </div>
+                            <!-- add leaflet map -->
+                            <div id="mapid" class="mapid"></div>
                             <!-- microdata - geo coordinates of the place   -->
                             <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
-                                <span class="margin-left-10">Latitude: 40.75</span>
-                                <span class="margin-left-10">Longitude: 73.98</span>
+                                <span class="margin-left-10">Latitude: 43.25346</span>
+                                <span class="margin-left-10">Longitude: -79.87943</span>
                                 <meta itemprop="latitude" content="40.75" />
                                 <meta itemprop="longitude" content="73.98" />
                             </div>
