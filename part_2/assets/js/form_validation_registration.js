@@ -18,11 +18,13 @@ function validateRegistrationForm() {
     else if(!validatePassword(password)){
         return false;
     }
-    //validate password
+    //validate the confirmed password
     else if(!validateConfirmPassword(password, confirmPassword)){
         return false;
-    }else if(!userAgreement.checked){
-        alert("Please indicate that you accept the Terms and Conditions");
+    }
+    //check if the uuser accept the terms
+    else if(!userAgreement.checked){
+        alert("Please indicate that you accept the terms");
         return false;
     }
     return true;  
@@ -85,13 +87,13 @@ function validatePassword(password) {
     //check if password is valid
     else if(!rePassword.test(password)){
         alert("Password is invalid! \n The password should contains minimum 6 characters, at least one lowercase letter, one uppercase letter");
-        document.getElementById('txt-passwor').focus();
+        document.getElementById('txt-password').focus();
         return false;
     }
     return true;
 }
 
-// fucntion for validating password
+// fucntion for validating confirmed password
 function validateConfirmPassword(password, confirmPassword) {
     if(confirmPassword == ""){
         alert("Confirm password must be filled out.");
@@ -103,20 +105,5 @@ function validateConfirmPassword(password, confirmPassword) {
         document.getElementById('txt-confirm-password').focus();
         return false;
     }
-    return password == confirmPassword;
-}
-
-// fucntion for validating password
-function validateConfirmPassword(password, confirmPassword) {
-    if(confirmPassword == ""){
-        alert("Confirm password must be filled out.");
-        document.getElementById('txt-confirm-password').focus();
-        return false;
-    }
-    else if(password != confirmPassword){
-        alert("Passwords do not match.");
-        document.getElementById('txt-confirm-password').focus();
-        return false;
-    }
-    return password == confirmPassword;
+    return true;
 }

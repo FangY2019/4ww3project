@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <!-- External style -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- External javascript -->
+    <script type="text/javascript" src="assets/js/form_validation_submission.js"></script>
 </head>
 
 <body>
@@ -50,17 +52,18 @@
 	================================================== -->
         <section>
             <div class="form-container">
-                <form class="register">
+                <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()">
                     <div>
                         <h3>Submit a New Coffee Shop </h3>
                     </div>
                     <div class="form-group-lable-and-input">
                         <label>Name of Coffee Shop</label>
-                        <input type="text" id="name">
+                        <input autocomplete="txt-shopname" type="text" id="txt-shopname" autofocus="">
                     </div>
                     <div class="form-group-lable-and-input">
                         <label>Description</label>
-                        <div><textarea placeholder="e.g. A great coffee shop in Hamilton downtown"></textarea></div>
+                        <div><textarea autocomplete="txt-description" id="txt-description"
+                                placeholder="e.g. A great coffee shop in Hamilton downtown"></textarea></div>
                     </div>
 
                     <div class="form-group-lable-and-input ">
@@ -68,26 +71,28 @@
                         <div class="flex-left">
                             <div>
                                 <label>Latitude:</label>
-                                <input type="text" id="form-lattitude" placeholder="e.g. 44.00000">
+                                <input autocomplete="txt-latitude" type="text" id="txt-latitude"
+                                    placeholder="e.g. 44.00000">
                             </div>
                             <div>
                                 <label>Longitude:</label>
-                                <input type="text" id="form-longitude" placeholder="e.g. -70.00000">
+                                <input autocomplete="txt-longitude" type="text" id="txt-longitude"
+                                    placeholder="e.g. -70.00000">
                             </div>
                         </div>
                     </div>
                     <div class="form-group-lable-and-input flex-left">
                         <label>Upload Image</label>
-                        <input type="file">
+                        <input type="file" accept=".jpg, .png, .bmp" id="upload-image">
                     </div>
 
                     <div class="form-group-lable-and-input flex-left">
                         <label>Upload Video</label>
-                        <input type="file">
+                        <input type="file" accept=".mp4" id="upload-video">
                     </div>
 
                     <div>
-                        <input class="btn" type="button" value="Submit">
+                        <input class="btn" type="submit" value="Submit">
                     </div>
                 </form>
             </div>
