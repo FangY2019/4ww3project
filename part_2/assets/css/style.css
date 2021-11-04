@@ -271,7 +271,7 @@ textarea {
   clear: both;
 }
 
-.hours{ 
+.hours{
   text-align: center;
   font-size: larger;
   padding-top: 20px;
@@ -392,4 +392,7 @@ footer {
   }
 }
 
-
+#search-map-id{
+    width: 100%;
+    height: 500px;
+}

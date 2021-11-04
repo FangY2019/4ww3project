@@ -20,9 +20,19 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<!-- External style -->
 	<link rel="stylesheet" href="assets/css/style.css">
+  <!-- Leaflet CSS file -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+ integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+ crossorigin=""/>
+  <!-- Leaflet JavaScript file -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+  <!-- External JavaScript -->
+  <script type="text/javascript" src="assets/js/searchmap.js"></script>
 </head>
 
-<body>
+<body onload="loadMap();">
   <div class="container">
 		<!-- Begin Header and menu
 	================================================== -->
@@ -119,11 +129,12 @@
 					</div>
 				</div>
 
-				<!-- Sample map
+				<!-- map
 			================================================== -->
-			</div>
-			<div class="search-map">
-				<img src="img/map-img.png" alt="Map" class="search-map-img">
+			<div class="search-map" itemscope itemtype="https://schema.org/Place">
+        <div id="search-map-id" class="search-map" ></div>
+        <!-- microdata - geo coordinates of the place   -->
+        <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates"></div>
 			</div>
     </main>
 
