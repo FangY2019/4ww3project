@@ -21,6 +21,7 @@
   <!-- External style -->
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- External JavaScript -->
+  <script type="text/javascript" src="assets/js/pass_param.js"></script>
 </head>
 
 <body>
@@ -75,10 +76,13 @@
 
         <!-- search button
 							================================================== -->
-        <div>
-          <a href="results_sample.html">
-            <input class="btn" type="button" value="Search">
+        <div class="btn-padding">
+          <a href="results_sample.html?local=false">
+            <input class="btn" type="button" value="Search All">
           </a>
+        </div>
+        <div class="btn-padding">
+          <input class="btn" type="button" value="Search Around Me" onclick="redirect()">
         </div>
       </form>
     </div>
