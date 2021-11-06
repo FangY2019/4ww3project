@@ -1,32 +1,53 @@
-
 // registration form validation
 function validateObjectSubmissionForm() {
-    let shopname = document.forms["form-object-submission"]["txt-shopname"].value;    
+    let shopname = document.forms["form-object-submission"]["txt-shopname"].value;
     let description = document.forms["form-object-submission"]["txt-description"].value;
     let latitude = document.forms["form-object-submission"]["txt-latitude"].value;
     let longitude = document.forms["form-object-submission"]["txt-longitude"].value;
-    let imageFilePath = document.getElementById("upload-image").value;
-    // validate shopname
-    if(!validateShopName(shopname)){
+    let imageFilePath = document.getElementById("image-upload").value;
+    let videoFilePath = document.getElementById("video-upload").value;
+    //validate shopname
+    if (!validateShopName(shopname)) {
         return false;
     }
-    // //validate description
-    else if(!validateDescription(description)){
+    //validate description
+    else if (!validateDescription(description)) {
         return false;
     }
-    // //validate latitude
-    else if(!validateLatitude(latitude)){
+    //validate latitude
+    else if (!validateLatitude(latitude)) {
         return false;
     }
     //validate longtitude
-    else if(!validateLongitude(longitude)){
+    else if (!validateLongitude(longitude)) {
         return false;
     }
-    //validate image format
-    // else if(!validateImageFormat(imageFilePath)){
-    //     return false;
-    // }
-    return true;  
+    //validate image file
+    else if (!validateImageFormat(imageFilePath)) {
+        return false;
+    }
+    //validate video file
+    else if (!validateVideoFormat(videoFilePath)) {
+        return false;
+    }
+    return true;
+}
+
+//get the user's coorniates and call the show postion function 
+function getCoordinates() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+//show the latitude and longitude of the user's position in the input
+function showPosition(position) {
+    var x = document.getElementById("txt-latitude");
+    var y = document.getElementById("txt-longitude");
+    x.value = position.coords.latitude;
+    y.value = position.coords.longitude;
 }
 
 
@@ -54,21 +75,16 @@ function validateDescription(description) {
 
 // fucntion for validating latitude
 function validateLatitude(latitude) {
-    //latitude validation regex 
-    //Assuming valid latitude for North America 
-    //                                  - range:25 - 70, not include 70
-    //                                           - before the decimal point, it might be 25 - 29 and 30 -69  
-    //                                 - with at most five digit in the demical place
-    var reLatitude= /^(2[5-9]|[3-6][0-9])($|\.[0-9]{1,5}$)/;
+    //latitude validation regex - a number
+    var reNumber= /^(\-)?\d+\.?\d*$/;
     //check if latitude is empty
     if (latitude == "") {
         alert("Latitude must be filled out.");
         document.getElementById('txt-latitude').focus();
         return false;
     }
-    //check if latitude is valid
-    else if(!reLatitude.test(latitude)){
-        alert("Latitude is invalid! \n The valid latitude should be a number between 25 and 70, not include 70");
+    if (!reNumber.test(latitude) || (parseFloat(latitude) < -90) || (parseFloat(latitude) > 90)) {
+        alert("Latitude is invalid! \n The valid latitude should be a number between -90 and 90");
         document.getElementById('txt-latitude').focus();
         return false;
     }
@@ -77,39 +93,50 @@ function validateLatitude(latitude) {
 
 // fucntion for validating longitude
 function validateLongitude(longitude) {
-    //longitude validation regex 
-    //Assuming valid longitude for North America 
-    //                       - range: -170 - -50, not include -170 
-    //                              - before the decimal point, it might be 100-169 or 50 - 99    
-    //                       - with at most five digit in the demical place
-    //                              - the number is end with the whole number or with a period following 1 to 5 digits
-    var reLongitude= /^-(1[0-6][0-9]|[5-9][0-9])($|\.[0-9]{1,5}$)/;
-    if(longitude == ""){
+    //longitude validation regex - a number
+    var reNumber= /^(\-)?\d*\.?\d*$/;
+    if (longitude == "") {
         alert("Longitude must be filled out.");
         document.getElementById('txt-longitude').focus();
         return false;
     }
     //check if longitude is valid
-    else if(!reLongitude.test(longitude)){
-        alert("Longitude is invalid! \n The valid longitude should be a number between -170 and -50, not include -170");
+    else if (!reNumber.test(longitude) || (parseFloat(longitude) < -180) || (parseFloat(longitude) > 180)) {
+        alert("Longitude is invalid! \n The valid longitude should be a number between -180 and 180");
         document.getElementById('txt-latitude').focus();
         return false;
     }
-    return password == confirmPassword;
+    return true;
 }
 
 // fucntion for validating uploading image
-function validateImageFormat(filePath) {
-    alert(filePath);
-    //file name validation regex - it accept .jpg, .bmp, and .png
-    var reFile= /\.(jpg|bmp|png)$/;
-    if(filePath == ""){
+function validateImageFormat(imageFilePath) {
+    //file name validation regex - it accept .jpg, .jpeg, and .png, and ingnore case
+    var reImage = /\.(jpg|jpeg|png)$/i;
+    if (imageFilePath == "") {
         alert("You should upload a image.");
-         return false;
+        return false;
     }
-    //check if longitude is valid
-    else if(!reFile.test(filePath)){
-        alert("It only allows jpg, bmp, and png image");
+    //check if the image format is allowed
+    else if (!reImage.test(imageFilePath)) {
+        alert("Invalid file type, please upload jpg, jpeg, or png file");
+        return false;
+    }
+    return true;
+}
+
+
+// fucntion for validating uploading video
+function validateVideoFormat(videoFilePath) {
+    //file name validation regex - it accept .mp4, .webm, and ingnore case
+    var reVideo = /\.(mp4|webm)$/i;
+    if (videoFilePath == "") {
+        alert("You should upload a video.");
+        return false;
+    }
+    //check if the video format is allowed
+    else if (!reVideo.test(videoFilePath)) {
+        alert("Invalid file type, please upload mp4 or wbem file");
         return false;
     }
     return true;

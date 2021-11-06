@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <!-- External style -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style_part2.css">
     <!-- External javascript -->
     <script type="text/javascript" src="assets/js/form_validation_submission.js"></script>
 </head>
@@ -52,6 +53,7 @@
 	================================================== -->
         <section>
             <div class="form-container">
+                <!-- when user click the submit button, it will call validateObjectSubmissionForm to validate the form first -->
                 <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()">
                     <div>
                         <h3>Submit a New Coffee Shop </h3>
@@ -67,7 +69,10 @@
                     </div>
 
                     <div class="form-group-lable-and-input ">
-                        <label>Location</label>
+                        <!-- users can get their coordinates by clicking the button or enter the number by themself
+                            If user click the button (Get your coordinates), it will call the getCoordinates() function to get the coordinate through Geolocation API.
+                         -->
+                        <label>Location</label> <span class="get-geolocation" onclick="getCoordinates()"> Get your coordinates</span>
                         <div class="flex-left">
                             <div>
                                 <label>Latitude:</label>
@@ -83,12 +88,12 @@
                     </div>
                     <div class="form-group-lable-and-input flex-left">
                         <label>Upload Image</label>
-                        <input type="file" accept=".jpg, .png, .bmp" id="upload-image">
+                        <input type="file" id="image-upload">
                     </div>
 
                     <div class="form-group-lable-and-input flex-left">
                         <label>Upload Video</label>
-                        <input type="file" accept=".mp4" id="upload-video">
+                        <input type="file" id="video-upload">
                     </div>
 
                     <div>

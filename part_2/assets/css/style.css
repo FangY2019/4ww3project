@@ -315,6 +315,26 @@ footer {
   text-align: center;
 }
 
+/* map size */
+#mapid{
+  width: 100%;
+  height: 250px;
+}
+
+.get-geolocation {
+  background-color: #dde9e9;
+  font-weight: bolder;
+  border: #9e9e9e 1px solid;
+  border-radius: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 20px;
+}
+
+.get-geolocation:hover {
+  color: blue;
+}
+
 /* Medium devices (992px wide or less) */
 @media (max-width: 992px) {
   body {
