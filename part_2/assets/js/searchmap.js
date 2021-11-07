@@ -13,27 +13,34 @@ function loadMap(x = 43.25966, y = -79.91823, z = 13){
     }).addTo(mymap);
     //add a marker with the location of the coffee shop
     var marker = new L.marker([43.25346,-79.87943])
-                    .bindPopup('Here is Durand Coffee')
+                    .bindPopup("<a class=\"img-ref\" href=\"individual_sample.html\"><img src=\"img/gallery/default.jpg\" class=\"sample-img-popup\" alt=\"Coffee Shop Picture\"/> <h3 class=\"des-text\">Here is Durand Coffee</h3></a><br>", {maxWidth:200})
                     .addTo(mymap);
+    //add another marker with the location of the coffee shop
     var marker2 = new L.marker([43.25326,-79.89943])
-                    .bindPopup('Here is Second Fake Coffee Shop')
+                    .bindPopup("<a class=\"img-ref\" href=\"individual_sample.html\"><img src=\"img/gallery/default.jpg\" class=\"sample-img-popup\" alt=\"Coffee Shop Picture\"/> <h3 class=\"des-text\">Here is Second Fake Coffee Shop</h3></a><br>", {maxWidth:200})
                     .addTo(mymap);
 }
 
 
+//https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 function success(pos) {
   var crd = pos.coords;
 
+  //debugging purpose
   console.log('Your current position is:');
   console.log('Latitude : ' + crd.latitude);
   console.log('Longitude: ' + crd.longitude);
   console.log('More or less ' + crd.accuracy + ' meters.');
 
+  //initialize the map with coordinates
   loadMap(crd.latitude, crd.longitude, 13);
 }
 
+//get position failed
 function error(err) {
-  alert("Accessing current location failed.");
+  //alert the user location service is blocked.
+  alert("Why are you doing this to me?\nAccessing location failed, is it blocked?");
+  //load map with default parameters.
   loadMap();
 }
 
@@ -42,8 +49,10 @@ function getLoc() {
 }
 
 function Initalize() {
+  //retrieve parameters from get request
   var queryDict = {};
   location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]});
+  //check request
   if(queryDict["local"] == "true") {
     getLoc();
     return;
