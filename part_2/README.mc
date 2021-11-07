@@ -3,7 +3,7 @@
 ## part 2
 
 ### a. Live Server
-http://3.142.111.3/4ww3project/part_2/
+https://fangy.app/4ww3project/part_2/
 
 ### b. Git Repository
 https://github.com/taoh4/4ww3project/tree/main/part_2
