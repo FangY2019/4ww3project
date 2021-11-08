@@ -13,5 +13,4 @@ https://github.com/taoh4/4ww3project/tree/main/part_2
 * Member 1: Fang Ye - yef10, 400273067
 * Member 2: Haoyang Tao - taoh4, 400171589
 
-### d. Notes
 
