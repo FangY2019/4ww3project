@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +42,7 @@
                         <li class="nav-li"><a href="index.php" class="nav-link active">Home</a></li>
                         <li class="nav-li"><a href="submission_object.php" class="nav-link">Submission</a></li>
                         <li class="nav-li"><a href="registration.php" class="nav-link">Registration</a></li>
-                                    <li class="nav-li"><a class="nav-link">Login</a></li>
+                        <li class="nav-li"><a href="login.php" class="nav-link">Login</a></li>
                         <li class="nav-li"><a href="search.php" class="nav-link">Search</a></li>
                     </ul>
                 </nav>
@@ -49,21 +53,60 @@
 
         <!-- Begin Body content
 	================================================== -->
-        <section>
-            <div class="form-container">
+    <section>
+            <div class="form-container">          
+
                 <!-- when user click the submit button, it will call validateObjectSubmissionForm to validate the form first -->
-                <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()">
+                <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()" method="post" action="php_process/submission_save.php">
                     <div>
                         <h3>Submit a New Coffee Shop </h3>
                     </div>
+
+                    <!-- If there is errors when the user submit the objects, show the error message -->
+                    <?php
+                        if(isset($_SESSION['object_submission_status_message'])){
+                            if(!empty($_SESSION['object_submission_status_message'])){
+                                $msg = "";
+                                if($_SESSION['object_submission_status_message']=='database_create_table_error'){
+                                    $msg = "Database Error: can not create table";
+                                }else if($_SESSION['object_submission_status_message']=='database_save_object_error'){
+                                    $msg = "Database Error: can not save objects";
+                                }else if($_SESSION['object_submission_status_message']=='is_object_exist'){
+                                    $msg = "The object exists in the system";
+                                }                                  
+                                //clear the message
+                                $_SESSION['object_submission_status_message'] = ''; 
+                                //show the error message
+                                echo '<div style="color: red">'.$msg.'</div>';
+                            }
+                        }
+                    ?> 
+                    <!-- prefill the form if the user choose remember me -->
+                    <?php
+                            $shopname = '';
+                            $description = '';
+                            $latitude = '';
+                            $longitude = '';
+                            if((isset($_GET['txt-shopname'])) && (isset($_GET['txt-description']))){
+                                 $shopname = $_GET['txt-shopname'];
+                                 $description = $_GET['txt-description'];
+                                 $latitude = $_GET['txt-latitude'];
+                                 $longitude = $_GET['txt-longitude'];
+                            }
+                    ?>
+
+                    <!-- input shopname -->
                     <div class="form-group-lable-and-input">
                         <label>Name of Coffee Shop</label>
-                        <input autocomplete="txt-shopname" type="text" id="txt-shopname" autofocus="">
+                        <input autocomplete="txt-shopname" type="text" id="txt-shopname" autofocus="" name="txt-shopname" value="<?php echo $shopname; ?>">
+                        <div id="shopname-error"></div>
                     </div>
+                    <!-- input description -->
                     <div class="form-group-lable-and-input">
                         <label>Description</label>
-                        <div><textarea autocomplete="txt-description" id="txt-description"
-                                placeholder="e.g. A great coffee shop in Hamilton downtown"></textarea></div>
+                        <div><textarea autocomplete="txt-description" id="txt-description" name="txt-description" 
+                                placeholder="e.g. A great coffee shop in Hamilton downtown"><?php echo $description; ?></textarea></div>
+                         <div id="description-error"></div>
                     </div>
 
                     <div class="form-group-lable-and-input ">
@@ -72,27 +115,34 @@
                          -->
                         <label>Location</label> <span class="get-geolocation" onclick="getCoordinates()"> Get your coordinates</span>
                         <div class="flex-left">
+                            <!-- input latitude -->
                             <div>
                                 <label>Latitude:</label>
-                                <input autocomplete="txt-latitude" type="text" id="txt-latitude"
+                                <input autocomplete="txt-latitude" type="text" id="txt-latitude" name="txt-latitude" value="<?php echo $latitude; ?>"
                                     placeholder="e.g. 44.00000">
+                                
                             </div>
+                            <!-- input longitude -->
                             <div>
                                 <label>Longitude:</label>
-                                <input autocomplete="txt-longitude" type="text" id="txt-longitude"
+                                <input autocomplete="txt-longitude" type="text" id="txt-longitude" name="txt-longitude" value="<?php echo $longitude; ?>"
                                     placeholder="e.g. -70.00000">
                             </div>
                         </div>
+                        <div id="geolocation-error"></div>
                     </div>
+                    <!-- input image -->
                     <div class="form-group-lable-and-input flex-left">
                         <label>Upload Image</label>
-                        <input type="file" id="image-upload">
+                        <input type="file" id="image-upload" name="image-upload">                        
                     </div>
-
+                    <div id="image-error"></div>
+                    <!-- input video -->
                     <div class="form-group-lable-and-input flex-left">
                         <label>Upload Video</label>
-                        <input type="file" id="video-upload">
+                        <input type="file" id="video-upload" name="video-upload">                        
                     </div>
+                    <div id="video-error"></div>
 
                     <div>
                         <input class="btn" type="submit" value="Submit">
