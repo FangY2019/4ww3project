@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    include 'inc/login_verify.php';
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
         <section>            
             <div class="form-container" >
                 <!-- when user click the submit button, it will call validateRegistrationForm to validate the form first -->
-                <form class="registration-form" id="form-registration" autocomplete="off" method="post" action="php_process/login_verify.php">
+                <form class="registration-form" id="form-registration" autocomplete="off" method="post"  method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <!-- if the user has registered successfully, show the message -->
                     <?php
                         if (@$_GET['registered'] == 'true')
@@ -69,22 +69,17 @@
                     </div>
                     <!-- If the user input the incorrect username or password, show the error message -->
                     <?php
-                        if(isset($_SESSION['login_status_message'])){
-                            if(!empty($_SESSION['login_status_message'])){
+                        if(array_key_exists('login_status_message', $errors)){
                                 $msg = "";
-                                if($_SESSION['login_status_message']=='empty'){
+                                if($errors['login_status_message']=='empty'){
                                     $msg = "Username and password can not be empty!";
-                                    //clear the message
-                                    $_SESSION['login_status_message'] = ''; 
-                                }else if($_SESSION['login_status_message']=='invalid'){
+                                }else if($errors['login_status_message']=='invalid'){
                                     $msg = "Invalid credentials";
-                                    //clear the message
-                                    $_SESSION['login_status_message'] = '';    
                                 }
                                 echo '<div style="color: red">'.$msg.'</div>';
-                            }
                         }
                     ?> 
+
                     <!-- prefill the form if the user choose remember me -->
                     <?php
                             $username_remembered = 0;
@@ -100,22 +95,23 @@
                                 }
                             }
                     ?>
+
                     <!-- input username -->
                     <div class="form-group-lable-and-input">
                         <label>User Name </label>
                         <input autocomplete="txt-username" type="text" id="txt-username" name="txt-username" autofocus=""
-                                value = "<?php if($username_remembered == 1) {echo $_COOKIE['username'];} ?>">
+                                value = "<?php  if($input_username !== ''){echo $input_username;}else if($username_remembered == 1){echo $_COOKIE['username'];} ?>">
                     </div>
                     <!-- input password -->
                     <div class="form-group-lable-and-input">
                         <label>Password </label>
-                        <input autocomplete="txt-password" type="password" id="txt-password" name="txt-password">
+                        <input autocomplete="txt-password" type="password" id="txt-password" name="txt-password" value="<?php  echo $input_password; ?>">
                     </div>
                     <!-- input checkbox remember me -->
                     <div class="form-group-lable-and-input">
                         <div id="user-agreement">
                             <input type="checkbox" id="lblrememberme" name="lblrememberme"
-                                    <?php if($username_remembered ==1){echo 'checked="checked"';}?>>
+                                    <?php if($username_remembered == 1 || $rememberme){echo 'checked="checked"';}?>>
                             <label class="form-check-label" for="lblrememberme">Remember me</label>
                         </div>
                     </div>

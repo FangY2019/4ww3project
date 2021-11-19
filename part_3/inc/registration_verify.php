@@ -1,74 +1,57 @@
 <?php
-    session_start();
+    $input_username = '';
+    $input_email = '';
+    $input_password = '';
+    $input_confirmed_password = '';
+    $input_country = '';
+    $input_terms = false;
+    $errors = [];
 
     if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) { 
         if ((isset( $_POST['registration_token']))) {
             if ( (!empty( $_POST['registration_token']))) {
-                if ( (isset($_POST['txt-username'])) && (isset($_POST['txt-email']))  && 
-                    (isset($_POST['txt-password'])) && (isset($_POST['country'])) && (isset($_POST['terms']))) {
-                    if((!empty( $_POST['txt-username']) ) && (!empty( $_POST['txt-email']))
-                        && (!empty( $_POST['txt-password'])) && (!empty( $_POST['country'])) && (!empty( $_POST['terms']))){
-                            //set cookie to generate prefilled form 
-                            setcookie('username', $_POST['txt-username'], time() + 60, "/"); // 1 minute
-                            setcookie('email', $_POST['txt-email'], time() + 60, "/"); 
-                            setcookie('password', $_POST['txt-password'], time() + 60, "/"); 
-                            setcookie('country', $_POST['country'], time() + 60, "/");
-                            setcookie('terms', $_POST['terms'], time() + 60, "/");
-                            // setcookie('username', $_POST['txt-username'], time() + 60, "/", '.fangy.app', TRUE, TRUE); // 1 minute
-                            // setcookie('email', $_POST['txt-email'], time() + 60, "/", '.fangy.app', TRUE, TRUE); 
-                            // setcookie('password', $_POST['txt-password'], time() + 60, "/", '.fangy.app', TRUE, TRUE); 
-                            // setcookie('country', $_POST['country'], time() + 60, "/", '.fangy.app', TRUE, TRUE);
-                            // setcookie('terms', $_POST['terms'], time() + 60, "/", '.fangy.app', TRUE, TRUE);
+                if ( (isset($_POST['txt-username'])) && (isset($_POST['txt-email']))  && (isset($_POST['txt-password'])) &&
+                    (isset($_POST['txt-confirm-password'])) && (isset($_POST['country'])) && (isset($_POST['terms']))) {
+                    if((!empty( $_POST['txt-username']) ) && (!empty( $_POST['txt-email'])) && (!empty( $_POST['txt-password']))
+                        && (!empty( $_POST['txt-confirm-password'])) && (!empty( $_POST['country'])) && (!empty( $_POST['terms']))){
+                        $input_username = htmlentities($_POST['txt-username']);
+                        $input_email = htmlentities($_POST['txt-email']);
+                        $input_password = htmlentities($_POST['txt-password']);
+                        $input_confirmed_password = htmlentities($_POST['txt-confirm-password']);
+                        $input_country = htmlentities($_POST['country']);
+                        $input_terms = htmlentities($_POST['terms']);
                         //database variables
                         //local server
                         $servername = 'localhost';                   
                         $username = 'root';
                         $password = '';
                         $dbname = '4ww3_project';
-                        $url = 'http://localhost/4ww3project/part_3/';
 
                         // //aws server 
                         // $servername = '3.142.111.3:3306';
                         // $username = 'root';
                         // $password = 'YEfang2021';
                         // $dbname = '4ww3_project'; 
-                        // $url = 'https://fangy.app/4ww3project/part_3/'; 
                         
                         // create database if the database does not exist
-                        create_database($servername, $username, $password, $dbname);
+                        create_database();
                         // create users table if the table does not exist
-                        create_users_table($servername, $username, $password, $dbname);                        
+                        create_users_table();                        
                         //check if the user email exist in the database
-                        if(!is_exist($servername, $username, $password, $dbname, $_POST['txt-username'], $_POST['txt-email'])){
-                            //if the user does not exist, save the user to database and rederect to the login page, else stay in the registrationpage
-                            if(save_user($servername,  $username, $password, $dbname, $_POST['txt-username'], $_POST['txt-email'], $_POST['txt-password'], $_POST['country'])){
-                                setcookie('username', null, -1, "/"); 
-                                setcookie('email', null, -1, "/"); 
-                                setcookie('password', null, -1, "/"); 
-                                setcookie('country', null, -1, "/");
-                                setcookie('terms', null, -1, "/"); 
+                        if(!is_exist($input_username, $input_email)){
+                            //save the user to database and rederect to the login page
+                            if(save_user($input_username, $input_email, $input_password, $input_country)){
                                 //redirect to a page
                                 $url = "http://localhost/4ww3project/part_3/login.php?registered=true";
                                 header('Location: ' .$url);  
-                            }else{
-                                $url = "http://localhost/4ww3project/part_3/part_3/registration.php";
-                                header('Location: ' .$url);
-                            }                                                   
-                        }else{
-                            $url = "http://localhost/4ww3project/part_3/registration.php";
-                            header('Location: ' .$url);
+                            }                                               
                         }
-
                     }else{
-                        $_SESSION['register_status_message'] = 'empty';
-                        $url = "http://localhost/4ww3project/part_3/registration.php";
-                        header('Location: ' .$url);
+                        $errors['register_status_message'] = 'empty';
                     }                
 
                 }else{
-                    $_SESSION['register_status_message'] = 'empty';
-                    $url = "http://localhost/4ww3project/part_3/registration.php";
-                    header('Location: ' .$url);
+                    $errors['register_status_message'] = 'empty';
                 }     
             }else {
                 echo 'empty_registration_token';
@@ -82,8 +65,12 @@
     }
 
     //Create database if the database does not exist
-    function create_database($servername, $username, $password, $dbname){ 
+    function create_database(){ 
         $is_successful = false;
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password;
         try {
             //create connection
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);       
@@ -104,8 +91,12 @@
     }
 
     //Create table if the table does not exist
-    function create_users_table($servername, $username, $password, $dbname){ 
-        $is_successful = false;           
+    function create_users_table(){ 
+        $is_successful = false; 
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password;           
         try { 
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             //Check if the table exists
@@ -127,7 +118,8 @@
                 if($dbh->query($sql)){//executing and verifying query
                     $is_successful = true;
                 }else{
-                    $_SESSION['register_status_message'] = 'database_create_table_error';
+                    GLOBAL $errors;
+                    $errors['register_status_message'] = 'database_create_table_error';
                 }
             }else{
                 $is_successful = true;
@@ -143,8 +135,12 @@
     }
 
     //check if the given username or email exist in the database
-    function is_exist($servername, $username, $password, $dbname, $input_username, $input_email){ 
+    function is_exist($input_username, $input_email){ 
         $is_exist = false;
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password; 
         try {                 
             //Create connection  
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -153,7 +149,8 @@
             $stmt = $dbh->prepare($sql);
             $result = $stmt->execute();
             if(($result == true) && ($stmt->rowCount() > 0)){
-                $_SESSION['register_status_message'] = 'is_email_exist';
+                GLOBAL $errors;
+                $errors['register_status_message'] = 'is_email_exist';
                 $is_exist = true;
             }
             //Check if the username exist
@@ -161,9 +158,13 @@
             $stmt = $dbh->prepare($sql);
             $result = $stmt->execute();
             if(($result == true) && ($stmt->rowCount() > 0)){
-                $_SESSION['register_status_message'] = 'is_username_exist';
+                GLOBAL $errors;
+                $errors['register_status_message'] = 'is_username_exist';
                 $is_exist = true;
             }
+            // print($is_exist);
+            // print_r( $errors);
+            // exit();
             //closing the connection
             $stmt = null;
             $dbh = null;         
@@ -176,8 +177,12 @@
 
 
     //Insert the user's information to the database
-    function save_user($servername,  $username, $password, $dbname, $input_username, $input_email, $input_password, $input_country){ 
-        $is_successful = false;                       
+    function save_user($input_username, $input_email, $input_password, $input_country){         
+        $is_successful = false;
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password;                  
         try {
             //Create connection  
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -188,7 +193,8 @@
             if($result){
                 $is_successful = true;
             }else{
-                $_SESSION['register_status_message'] = 'database_save_user_error';
+                GLOBAL $errors;
+                $errors['register_status_message'] = 'database_save_user_error';
             }
             //closing the connection
             $stmt = null;

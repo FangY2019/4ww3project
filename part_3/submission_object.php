@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    include 'inc/submission_save.php';
 ?>
 
 <!DOCTYPE html>
@@ -57,43 +57,27 @@
             <div class="form-container">          
 
                 <!-- when user click the submit button, it will call validateObjectSubmissionForm to validate the form first -->
-                <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()" method="post" action="php_process/submission_save.php">
+                <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div>
                         <h3>Submit a New Coffee Shop </h3>
                     </div>
 
                     <!-- If there is errors when the user submit the objects, show the error message -->
                     <?php
-                        if(isset($_SESSION['object_submission_status_message'])){
-                            if(!empty($_SESSION['object_submission_status_message'])){
-                                $msg = "";
-                                if($_SESSION['object_submission_status_message']=='database_create_table_error'){
-                                    $msg = "Database Error: can not create table";
-                                }else if($_SESSION['object_submission_status_message']=='database_save_object_error'){
-                                    $msg = "Database Error: can not save objects";
-                                }else if($_SESSION['object_submission_status_message']=='is_object_exist'){
-                                    $msg = "The object exists in the system";
-                                }                                  
-                                //clear the message
-                                $_SESSION['object_submission_status_message'] = ''; 
-                                //show the error message
-                                echo '<div style="color: red">'.$msg.'</div>';
-                            }
+                        if(array_key_exists('object_submission_status_message', $errors)){
+                            $msg = "";
+                            if($errors['object_submission_status_message']=='database_create_table_error'){
+                                 $msg = "Database Error: can not create table";
+                            }else if($errors['object_submission_status_message']=='database_save_object_error'){
+                                $msg = "Database Error: can not save objects";
+                            }else if($errors['object_submission_status_message']=='is_object_exist'){
+                                $msg = "The object exists in the system";
+                            }                                  
+                            //show the error message
+                            echo '<div style="color: red">'.$msg.'</div>';
+
                         }
                     ?> 
-                    <!-- prefill the form if the user choose remember me -->
-                    <?php
-                            $shopname = '';
-                            $description = '';
-                            $latitude = '';
-                            $longitude = '';
-                            if((isset($_GET['txt-shopname'])) && (isset($_GET['txt-description']))){
-                                 $shopname = $_GET['txt-shopname'];
-                                 $description = $_GET['txt-description'];
-                                 $latitude = $_GET['txt-latitude'];
-                                 $longitude = $_GET['txt-longitude'];
-                            }
-                    ?>
 
                     <!-- input shopname -->
                     <div class="form-group-lable-and-input">

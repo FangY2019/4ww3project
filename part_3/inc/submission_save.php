@@ -1,70 +1,71 @@
 <?php
-// start the session
-session_start();
-    // check if the user input is empty, if not, save the object information to database, set values for different eroor througn session
+    $shopname = '';
+    $description = '';
+    $latitude = '';
+    $longitude = '';
+    $image = '';
+    $video = '';
+    $errors = [];
+    // check if the user input is empty, if not, save the object information to database
     if ((isset($_POST['txt-shopname'])) && (isset($_POST['txt-description']))  && 
         (isset($_POST['txt-latitude'])) && (isset($_POST['txt-longitude'])) && (isset($_POST['image-upload'])) && (isset($_POST['video-upload']))) {
         if((!empty( $_POST['txt-shopname']) ) && (!empty( $_POST['txt-description']))
             && (!empty( $_POST['txt-latitude'])) && (!empty( $_POST['txt-longitude'])) && (!empty($_POST['image-upload'])) && (!empty( $_POST['video-upload']))){
-            
+            $shopname = htmlentities($_POST['txt-shopname']);
+            $description = htmlentities($_POST['txt-description']);
+            $latitude = htmlentities($_POST['txt-latitude']);
+            $longitude = htmlentities($_POST['txt-longitude']);
+            $image = htmlentities($_POST['image-upload']);
+            $video = htmlentities($_POST['video-upload']);
+                        
             //database variables
             //local server
             $servername = 'localhost';                   
             $username = 'root';
             $password = '';
             $dbname = '4ww3_project';
-            $url = 'http://localhost/4ww3project/part_3/';
 
             // //aws server 
             // $servername = '3.142.111.3:3306';
             // $username = 'root';
             // $password = 'YEfang2021';
             // $dbname = '4ww3_project';  
-            // $url = 'https://fangy.app/4ww3project/part_3/';
             
             //check if the table and object exist in the database
-            echo "create_objects_table: ";
-            print(create_objects_table($servername, $username, $password, $dbname));
-            echo "<br/>";
-            echo "<br/>";
-            echo "is_exist: ";
-            print(is_exist($servername, $username, $password, $dbname, $_POST['txt-shopname']));
-            echo "<br/>";
-            echo "<br/>";
+            // echo "create_objects_table: ";
+            // print(create_objects_table($servername, $username, $password, $dbname));
+            // echo "<br/>";
+            // echo "<br/>";
+            // echo "is_exist: ";
+            // print(is_exist($servername, $username, $password, $dbname, $_POST['txt-shopname']));
+            // echo "<br/>";
+            // echo "<br/>";
             // exit();
-            if((create_objects_table($servername, $username, $password, $dbname)) && (!is_exist($servername, $username, $password, $dbname, $_POST['txt-shopname']))){
-                //if the object does not exist, save the object to database and rederect to the login page, else stay in the registrationpage
-                if(save_object($servername,  $username, $password, $dbname, $_POST['txt-shopname'], $_POST['txt-description'], $_POST['txt-latitude'], $_POST['txt-longitude'], $_POST['image-upload'], $_POST['video-upload'])){
-                    $object_id = get_object($servername, $username, $password, $dbname, $_POST['txt-shopname'], $_POST['txt-latitude'], $_POST['txt-longitude']);
+            if((create_objects_table()) && (!is_exist($shopname))){
+                //if the object does not exist, save the object to database and rederect to the login page, else stay in the registration page
+                if(save_object($shopname, $description, $latitude, $longitude, $image, $video)){
+                    $object_id = get_object($shopname, $latitude, $longitude);
                     //redirect to a page
-                    $url =$url . "individual_object.php?id=$object_id";
+                    $url = "http://localhost/4ww3project/part_3/individual_object.php?id=$object_id";
                     header('Location: ' .$url);  
-                }else{
-                    $url =$url . "submission_object.php?txt-shopname={$_POST['txt-shopname']}&txt-description={$_POST['txt-description']}&txt-latitude={$_POST['txt-latitude']}&txt-longitude={$_POST['txt-longitude']}";
-                    header('Location: ' .$url);
-                }                                                   
-            }else{                          
-                $url =$url . "submission_object.php?txt-shopname={$_POST['txt-shopname']}&txt-description={$_POST['txt-description']}&txt-latitude={$_POST['txt-latitude']}&txt-longitude={$_POST['txt-longitude']}";
-                header('Location: ' .$url);
+                }                                              
             }
-
         }else{
-            $_SESSION['object_submission_status_message'] = 'empty';
-            $url =$url . "submission_object.php?txt-shopname={$_POST['txt-shopname']}&txt-description={$_POST['txt-description']}&txt-latitude={$_POST['txt-latitude']}&txt-longitude={$_POST['txt-longitude']}";
-            header('Location: ' .$url);
-        }                
-
+            $errors['object_submission_status_message'] = 'empty';
+        }
     }else{
-        $_SESSION['object_submission_status_message'] = 'empty';
-        $url =$url . "submission_object.php?txt-shopname={$_POST['txt-shopname']}&txt-description={$_POST['txt-description']}&txt-latitude={$_POST['txt-latitude']}&txt-longitude={$_POST['txt-longitude']}";
-        header('Location: ' .$url);
+        $errors['object_submission_status_message'] = 'empty';
     }            
 
 
     //Create table if the table does not exist
-    function create_objects_table($servername, $username, $password, $dbname){ 
+    function create_objects_table(){ 
         //variable for if the table exist or is created successfully
-        $is_successful = false;             
+        $is_successful = false;
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password;             
         try {
             //Create connection  
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -97,7 +98,8 @@ session_start();
                 if($dbh->query($sql)){
                     $is_successful = true;
                 }else{
-                    $_SESSION['object_submission_status_message'] = 'database_create_table_error';
+                    GLOBAL $errors;
+                    $errors['object_submission_status_message'] = 'database_create_table_error';
                  }  
             }else{
                 $is_successful = true;
@@ -113,8 +115,12 @@ session_start();
     }
 
     //check if the given object(with same shopname) exist in the database
-    function is_exist($servername, $username, $password, $dbname, $shopname){ 
-        $is_exist = false;        
+    function is_exist($shopname){ 
+        $is_exist = false;
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password;        
         try {
             //Create connection  
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -134,7 +140,8 @@ session_start();
             // print(($result == true) && ($stmt->rowCount() > 0));
             //Check if the object exists
             if(($result == true) && ($stmt->rowCount() > 0)){
-                $_SESSION['object_submission_status_message'] = 'is_object_exist';
+                GLOBAL $errors;
+                $errors['object_submission_status_message'] = 'is_object_exist';
                 $is_exist = true;            
             }
             //closing the connection
@@ -149,9 +156,13 @@ session_start();
 
 
     //Insert the objec to the database
-    function save_object($servername,  $username, $password, $dbname, $shopname, $description, $latitude, $longitude, $url_image, $url_video){ 
+    function save_object($shopname, $description, $latitude, $longitude, $url_image, $url_video){ 
         //variable to check if the object is saved in the database successfully
-        $is_successful = false;                    
+        $is_successful = false;
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password;                    
         try {
             //Create connection  
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -165,7 +176,8 @@ session_start();
             if($result){
                   $is_successful = true;
             }else{
-                $_SESSION['object_submission_status_message'] = 'database_save_object_error';
+                GLOBAL $errors;
+                $errors['object_submission_status_message'] = 'database_save_object_error';
             }
             //closing the connection
             $stmt = null;
@@ -178,8 +190,12 @@ session_start();
     } 
     
     //Insert the objec to the database
-    function get_object($servername,  $username, $password, $dbname, $shopname, $latitude, $longitude){ 
+    function get_object($shopname, $latitude, $longitude){ 
         $object_id = -1;
+        GLOBAL $servername;  
+        GLOBAL $dbname;
+        GLOBAL $username;
+        GLOBAL $password;
         try {
             //Create connection  
             $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
