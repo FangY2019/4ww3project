@@ -57,7 +57,7 @@
             <div class="form-container">          
 
                 <!-- when user click the submit button, it will call validateObjectSubmissionForm to validate the form first -->
-                <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form id="form-object-submission" autocomplete="off" onsubmit="return validateObjectSubmissionForm()" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                     <div>
                         <h3>Submit a New Coffee Shop </h3>
                     </div>
@@ -67,9 +67,9 @@
                         if(array_key_exists('object_submission_status_message', $errors)){
                             $msg = "";
                             if($errors['object_submission_status_message']=='database_create_table_error'){
-                                 $msg = "Database Error: can not create table";
+                                 $msg = "Database Error: fail to create table";
                             }else if($errors['object_submission_status_message']=='database_save_object_error'){
-                                $msg = "Database Error: can not save objects";
+                                $msg = "Database Error: fail to save objects";
                             }else if($errors['object_submission_status_message']=='is_object_exist'){
                                 $msg = "The object exists in the system";
                             }                                  

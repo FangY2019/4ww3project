@@ -85,7 +85,8 @@
                     <div class="form-group-lable-and-input">
                         <label  for="txt-username">User Name </label>
                         <input autocomplete="txt-username" type="text" id="txt-username" autofocus="" name="txt-username"
-                                value = "<?php echo $input_username; ?>" placeholder="Contain at least 6 character">
+                                value = "<?php echo $input_username; ?>" >
+                        <span style="font-size: 10px;">* Contain at least 6 character</span>
                         <div id="username-error"></div>
                     </div>
                     <div class="form-group-lable-and-input">

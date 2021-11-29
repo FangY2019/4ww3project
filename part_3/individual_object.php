@@ -1,3 +1,7 @@
+<?php
+    include 'inc/individual_object_getdata.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,17 +86,17 @@
                         <!-- img with creative comons license, from https://images.app.goo.gl/y3xtUHUSn13LiotM8 -->
                         <div class="coffee-shop-img">
                             <picture>
+                               <img src = <?php echo $image_url?> alt="Coffee Shop" />
                                 <source srcset="img/coffee-shop-1-sma.jpg 320w,
                                     img/coffee-shop-1-mid.jpg 800w,
                                     img/coffee-shop-1.jpg 1200w" sizes="(min-width: 60rem) 80vw,
-                                   (min-width: 40rem) 90vw, 100vw">
-                                <img src="img/coffee-shop-1-sma.jpg" alt="Coffee Shop" />
+                                   (min-width: 40rem) 90vw, 100vw">                    
                             </picture>
                         </div>
                         <!-- Video provided by Videvo, downloaded from www.videvo.net  -->
                         <div class="coffee-shop-video">
                             <video controls style="width:100%">
-                                <source src="img/coffee.mp4" />
+                                <source src=<?php echo $video_url?> />
                             </video>
                         </div>
                     </div>
@@ -101,35 +105,40 @@
                     <div class="coffee-shop-overall-info margin-left-10">
                         <!-- a div for coffee shop name -->
                         <div>
-                            <div class="coffee-shop-name">Durand Coffee </div>
+                            <div class="coffee-shop-name"><?php echo $shopname?> </div>
                         </div>
                         <!-- a div for desription -->
                         <div>
-                            <strong>Description: </strong>A great coffee shop in Hamilton downtown
+                            <strong>Description: </strong><?php echo $description?>
                         </div>
                         <!-- a div for rating and the overal number of reivews -->
                         <div class="flex-left">
                             <div class="rating">
-                                <!-- a star icon with filling -->
+                                <!-- a star icon with filling, check the aveage ranking and show fill the star according to the average ranking -->
                                 <span>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i <?php if($avg_ranking > 1){echo 'class="fa fa-star"';} else if($avg_ranking >= 0.5) {echo 'class="fa fa-star-half-o"';} 
+                                    else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                                 <span>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i <?php if($avg_ranking > 2){echo 'class="fa fa-star"';} else if($avg_ranking >= 1.5){echo 'class="fa fa-star-half-o"';} 
+                                     else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                                 <span>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i <?php if($avg_ranking > 3){echo 'class="fa fa-star"';} else if($avg_ranking >= 2.5){echo 'class="fa fa-star-half-o"';} 
+                                     else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                                 <span>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i <?php if($avg_ranking > 4){echo 'class="fa fa-star"';} else if($avg_ranking >= 3.5){echo 'class="fa fa-star-half-o"';} 
+                                     else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                                 <!-- a star icon with half filling -->
                                 <span>
-                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                    <i <?php if($avg_ranking >= 5){echo 'class="fa fa-star"';} else if($avg_ranking >= 4.5){echo 'class="fa fa-star-half-o"';} 
+                                     else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div class="margin-bottom-20">
-                                &nbsp;&nbsp;<strong>3 reviews</strong>
+                                &nbsp;&nbsp;<strong><?php echo count($reviews)?> reviews</strong>
                             </div>
                         </div>
                         <!-- Add review button -->
@@ -149,8 +158,8 @@
                             <div id="mapid" class="mapid"></div>
                             <!-- microdata - geo coordinates of the place   -->
                             <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
-                                <span class="margin-left-10">Latitude: 43.25346</span>
-                                <span class="margin-left-10">Longitude: -79.87943</span>
+                                <span class="margin-left-10">Latitude: <?php echo $latitude?></span>
+                                <span class="margin-left-10">Longitude: <?php echo $longitude?></span>
                                 <meta itemprop="latitude" content="40.75" />
                                 <meta itemprop="longitude" content="73.98" />
                             </div>

@@ -1,6 +1,8 @@
 <?php
     session_start();
 
+    include 'pdo.php';
+
     $input_username = '';
     $input_password = '';
     $rememberme = false;
@@ -16,23 +18,10 @@
                             $input_password = htmlentities($_POST['txt-password']);
                             if(isset($_POST['lblrememberme']) && !empty( $_POST['lblrememberme'])){
                                 $rememberme = true;
-                            }
-                            //database variables
-                            //local server
-                            $servername = 'localhost';                   
-                            $username = 'root';
-                            $password = '';
-                            $dbname = '4ww3_project';
-
-                            // //aws server 
-                            // $servername = '3.142.111.3:3306';
-                            // $username = 'root';
-                            // $password = 'YEfang2021';
-                            // $dbname = '4ww3_project'; 
-                            
+                            }                           
                     
                             //check if the user email exist in the database
-                            if(login($input_username, $input_password)){
+                            if(login($pdo, $input_username, $input_password)){
                                 $_SESSION['username'] = $input_username;
                                 $_SESSION['valid'] = true;
                                 $lblrememberme = '0';
@@ -80,33 +69,28 @@
         }  else {
             echo 'invalid_login_token';
         }
-    }else {
-        echo 'invalid_method';
     }
+    //closing the connection
+    $pdo = null;
 
     //Check if the given username and password match a record in the database
-    function login($input_username, $input_password){ 
-        $is_successful = false;
-        GLOBAL $servername;  
-        GLOBAL $dbname;
-        GLOBAL $username;
-        GLOBAL $password;                 
+    function login($pdo, $input_username, $input_password){ 
+        $is_successful = false;              
         try {
-            //Create connection  
-            $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             //Check if the email exist
-            $sql = "SELECT pwd FROM users WHERE username = \"$input_username\"";
-            $stmt = $dbh->prepare($sql);
-            $result = $stmt->execute();
+            $sql = "SELECT salt, passwordhash FROM users WHERE username = :username";
+            $stmt = $pdo->prepare($sql);
+            $values = [':username' => $input_username];
+            $result = $stmt->execute($values);       
             if($result){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($row['pwd'] === $input_password){
+                //Get the salt and hash the input password, then compare if the hashing value is matching with the stored hashed password
+                $passwordhash = hash('sha256', $input_password . $row['salt']);
+                if($row['passwordhash'] === $passwordhash){
                     $is_successful = true;
                 }
             }
-            //closing the connection
             $stmt = null;
-            $dbh = null;
         } catch (PDOException $e) {
             GLOBAL $errors;
             $errors['status_message'] = 'invalid';
