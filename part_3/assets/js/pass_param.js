@@ -1,4 +1,4 @@
 function redirect() {
   //Pass parameter via get
-  window.location.href = 'results_sample.html?local=true';
+  window.location.href = 'search_results.php?local=true';
 }
