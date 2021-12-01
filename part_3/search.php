@@ -42,7 +42,7 @@
             <li class="nav-li"><a href="submission_object.php" class="nav-link">Submission</a></li>
             <li class="nav-li"><a href="registration.php" class="nav-link">Registration</a></li>
             <li class="nav-li"><a href="login.php" class="nav-link">Login</a></li>
-            <li class="nav-li"><a href="search.php" class="nav-link">Search</a></li>
+            <li class="nav-li"><a href="search.php?name=&stars=" class="nav-link">Search</a></li>
         </ul>
       </nav>              
     </div>
@@ -52,20 +52,20 @@
 
   <main>
     <div class="form-container">
-      <form class="registration-form">
+      <form class="registration-form" method="get" action="search_results.php" name="form"> 
         <div>
           <h3>Search!</h3>
         </div>
         <div class="search-bar">
           <label>Name: </label>
-          <input type="text" id="name"/>
+          <input type="text" id="name" name="name"/>
         </div>
 
         <!-- Drop down menu, filter of stars
 							================================================== -->
         <div class="form-group-lable-and-input">
           <label>Stars: </label>
-          <select class="select-box">
+          <select class="select-box" id="stars" name="stars">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -74,15 +74,15 @@
           </select>
         </div>
 
+        <input type='hidden' value="false" name="local">
+
         <!-- search button
 							================================================== -->
         <div class="btn-padding">
-          <a href="search_results.php?local=false">
-            <input class="btn" type="button" value="Search All">
-          </a>
+            <input class="btn" type="submit" value="Search All">
         </div>
         <div class="btn-padding">
-          <input class="btn" type="button" value="Search Around Me" onclick="redirect()">
+          <input class="btn" type="submit" value="Search Around Me" onclick="document.forms['form'].local.value='true'">
         </div>
       </form>
     </div>

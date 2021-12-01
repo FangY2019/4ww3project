@@ -1,3 +1,7 @@
+<?php
+    include 'inc/search.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +64,7 @@
 
     <main>
       <header class="welcome-section">
-        <h2 class="title">Search Result</h2>
+        <h2 class="title">Search Result, <?php echo 1 ?></h2>
       </header>
 
 			<!-- Sample Objects -->

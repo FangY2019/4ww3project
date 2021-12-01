@@ -44,7 +44,7 @@
             <li class="nav-li"><a href="submission_object.php" class="nav-link">Submission</a></li>
             <li class="nav-li"><a href="registration.php" class="nav-link">Registration</a></li>
 			<li class="nav-li"><a href="login.php" class="nav-link">Login</a></li>
-            <li class="nav-li"><a href="search.php" class="nav-link">Search</a></li>
+            <li class="nav-li"><a href="search.php?name=&stars=" class="nav-link">Search</a></li>
           </ul>
         </nav>
       </div>
