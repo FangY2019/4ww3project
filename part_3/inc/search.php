@@ -2,22 +2,19 @@
     include 'pdo.php';
 
     $name = '';
-    $stars = 0;   
-    $shop_name = []; 
-    $description = [];
-    $latitude = [];
-    $longitude = [];
-    $image_url = [];
-    $video_url = [];
-    $avg_ranking = [];
-    $result = [];
+    $rows = [];
 
     if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) { 
         if ((isset( $_GET['name']))) {
             if ( (!empty( $_GET['name']))) {
                 $name = $_GET['name'];
+                $rating = $_GET['stars'];
                 $result = getObjectFromDatabaseByName($pdo, $name);
-
+                foreach($result as $row) {
+                    if(getAvgRank($pdo, $row['id']) >= $rating) {
+                        $rows[] = $row;
+                    }
+                }
             }else {
                 echo 'invalid links';
             }    
@@ -39,5 +36,26 @@
             die();
         }
         return $result;
+    }
+
+    //Get the average ranking by the given id
+    function getAvgRank($pdo, $object_id){ 
+        $avg_rank = 0;
+        try {
+            //Check if the email exist
+            $sql = "SELECT AVG(ranking) AS avg_ranking FROM review WHERE `object_id` = :objectid";
+            $stmt = $pdo->prepare($sql);
+            $values = [':objectid' => $object_id];
+            $result = $stmt->execute($values);       
+            if($result){
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $avg_rank = $row['avg_ranking'];
+            }
+            $stmt = null;
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+        return $avg_rank;
     }
 ?>

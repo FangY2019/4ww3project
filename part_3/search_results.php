@@ -69,11 +69,11 @@
 
 			<!-- Sample Objects -->
 			<div class="search-obj-container">
-				<?php foreach($result as $row) { ?>
+				<?php foreach($rows as $row) { ?>
 					<div class="search-objects">
 						<a class="img-ref" href="individual_object.php">
 							<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-							<img src= <?php $row['image_url_key'] ?> class="sample-img" alt="Coffee Shop Picture"/>
+							<img src= <?php echo $row['image_url_key'] ?> class="sample-img" alt="Coffee Shop Picture"/>
 						</a>
 						<div class="description">
 							<h4 class="des-title"> <?php echo $row['shopname'] ?> </h4>
