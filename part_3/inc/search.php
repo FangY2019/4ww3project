@@ -5,21 +5,13 @@
     $rows = [];
 
     if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) { 
-        if ((isset( $_GET['name']))) {
-            if ( (!empty( $_GET['name']))) {
-                $name = $_GET['name'];
-                $rating = $_GET['stars'];
-                $result = getObjectFromDatabaseByName($pdo, $name);
-                foreach($result as $row) {
-                    if(getAvgRank($pdo, $row['id']) >= $rating) {
-                        $rows[] = $row;
-                    }
-                }
-            }else {
-                echo 'invalid links';
-            }    
-        }  else {
-            echo 'invalid links';
+        $name = $_GET['name'];
+        $rating = $_GET['stars'];
+        $result = getObjectFromDatabaseByName($pdo, $name);
+        foreach($result as $row) {
+            if(getAvgRank($pdo, $row['id']) >= $rating) {
+                $rows[] = $row;
+            }
         }
     }
     //closing the connection
