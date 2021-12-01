@@ -64,74 +64,46 @@
 
     <main>
       <header class="welcome-section">
-        <h2 class="title">Search Result, <?php echo 1 ?></h2>
+        <h2 class="title">Search Result for <?php echo $name ?></h2>
       </header>
 
 			<!-- Sample Objects -->
 			<div class="search-obj-container">
-				<div class="search-objects">
-					<a class="img-ref" href="individual_object.php">
-						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-						<img src="img/gallery/default.jpg" class="sample-img" alt="Coffee Shop Picture"/>
-					</a>
-					<div class="description">
-						<h4 class="des-title">Durand Coffee</h4>
-						<p class="des-text">A great coffee shop in Hamilton downtown.</p>
-						<div class="rating-container">
-								<div class="rating">
-										<!-- a star icon with filling -->
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<!-- a star icon with half filling -->
-										<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
-										</span>
-								</div>
+				<?php foreach($result as $row) { ?>
+					<div class="search-objects">
+						<a class="img-ref" href="individual_object.php">
+							<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
+							<img src= <?php $row['image_url_key'] ?> class="sample-img" alt="Coffee Shop Picture"/>
+						</a>
+						<div class="description">
+							<h4 class="des-title"> <?php echo $row['shopname'] ?> </h4>
+							<p class="des-text"> <?php echo $row['shop_description'] ?> </p>
+							<div class="rating-container">
+									<div class="rating">
+											<!-- a star icon with filling -->
+											<span>
+													<i class="fa fa-star" aria-hidden="true"></i>
+											</span>
+											<span>
+													<i class="fa fa-star" aria-hidden="true"></i>
+											</span>
+											<span>
+													<i class="fa fa-star" aria-hidden="true"></i>
+											</span>
+											<span>
+													<i class="fa fa-star" aria-hidden="true"></i>
+											</span>
+											<!-- a star icon with half filling -->
+											<span>
+													<i class="fa fa-star-half-o" aria-hidden="true"></i>
+											</span>
+									</div>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="search-objects">
-					<a class="img-ref" href="individual_object.php">
-						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-						<img src="img/gallery/default.jpg" class="sample-img" alt="Coffee Shop Picture"/>
-					</a>
-					<div class="description">
-						<h4 class="des-title">Second Fake Coffee Shop</h4>
-						<p class="des-text">This coffee shop is Nil.</p>
-						<div class="rating-container">
-								<div class="rating">
-										<!-- a star icon with filling -->
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<!-- a star icon with half filling -->
-										<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
-										</span>
-								</div>
-						</div>
-					</div>
-				</div>
+				<?php
+				}
+				?>
 
 				<!-- map
 			================================================== -->
