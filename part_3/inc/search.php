@@ -1,20 +1,27 @@
 <?php
     include 'pdo.php';
-    ini_set("display_errors", 0);
+    //ini_set("display_errors", 0);
 
+    $test = 123;
     $name = '';
     $rows = [];
 
     if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) { 
         $name = $_GET['name'];
+        if($name == NULL){
+            $name='';
+        }
         $rating = $_GET['stars'];
         $result = getObjectFromDatabaseByName($pdo, $name);
         foreach($result as $row) {
-            if(getAvgRank($pdo, $row['id']) >= $rating) {
-                $row['rating'] = getAvgRank($pdo, $row['id']);
+            $average_rank = getAvgRank($pdo, $row['id']);
+            if($average_rank >= $rating) {
+                $row['rating'] = $average_rank;
                 $rows[] = $row;
             }
         }
+        //print_r($rows);
+        
     }
     //closing the connection
     $pdo = null;
@@ -49,6 +56,9 @@
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
+        }
+        if($avg_rank==NULL){
+            $avg_rank=0;
         }
         return $avg_rank;
     }

@@ -69,7 +69,7 @@
 		<div class="search-obj-container">
 			<?php foreach($rows as $row) { ?>
 				<div class="search-objects">
-					<a class="img-ref" href="individual_object.php">
+					<a class="img-ref" href=<?php echo "individual_object.php?id=".$row['id'] ?>>
 						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
 						<img src= <?php echo 'https://4ww3projectbucket.s3.us-east-2.amazonaws.com/' .$row['image_url_key'] ?> class="sample-img" alt="Coffee Shop Picture"/>
 					</a>

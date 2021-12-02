@@ -36,7 +36,7 @@
   <script type="text/javascript" src="assets/js/searchmap.js"></script>
 </head>
 
-<body onload="Initalize()">
+<body onload='Initalize(<?php echo json_encode($rows) ?>)'>
   <div class="container">
 		<!-- Begin Header and menu
 	================================================== -->
@@ -64,57 +64,55 @@
 
     <main>
       <header class="welcome-section">
-        <h2 class="title">Search Result for <?php echo $name ?></h2>
+    	<h2 class="title">Search Result for <?php echo $name ?></h2>
       </header>
-
-			<!-- Sample Objects -->
-			<div class="search-obj-container">
-				<?php foreach($rows as $row) { ?>
-					<div class="search-objects">
-						<a class="img-ref" href="individual_object.php">
-							<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-							<img src= <?php echo 'https://4ww3projectbucket.s3.us-east-2.amazonaws.com/' .$row['image_url_key'] ?> class="sample-img" alt="Coffee Shop Picture"/>
-						</a>
-						<div class="description">
-							<h4 class="des-title"> <?php echo $row['shopname'] ?> </h4>
-							<p class="des-text"> <?php echo $row['shop_description'] ?> </p>
-							<div class="rating-container">
-								<div class="rating">
-									<?php 
-									$total = 1;
-									for ($i=1; $i<$row['rating'];$i++) { 
+	  <div class="search-obj-container">
+			<?php foreach($rows as $row) { ?>
+				<div class="search-objects">
+					<a class="img-ref" href= <?php echo "individual_object.php?id=".$row['id'] ?>>
+						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
+						<img src= <?php echo 'https://4ww3projectbucket.s3.us-east-2.amazonaws.com/' .$row['image_url_key'] ?> class="sample-img" alt="Coffee Shop Picture"/>
+					</a>
+					<div class="description">
+						<h4 class="des-title"> <?php echo $row['shopname'] ?> </h4>
+						<p class="des-text"> <?php echo $row['shop_description'] ?> </p>
+						<div class="rating-container">
+							<div class="rating">
+								<?php 
+								$total = 0;
+								for ($i=1; $i<$row['rating'];$i++) { 
+									$total++;
+									?>
+										<!-- a star icon with filling -->
+										<span>
+											<i class="fa fa-star" aria-hidden="true"></i>
+										</span>
+									<?php
+									if($row['rating'] - $i < 1){
 										$total++;
 										?>
-											<!-- a star icon with filling -->
-											<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-											</span>
-										<?php
-										if($row['rating'] - $i < 1){
-											$total++;
-											?>
-											<!-- a star icon with half filling -->
-											<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
-											</span>
-										<?php
-										}?>
-									<?php 
-									}
-									for ($i=$total; $i<5;$i++) { ?>
+										<!-- a star icon with half filling -->
 										<span>
-											<i class="fa fa-star-o" aria-hidden="true"></i>
+											<i class="fa fa-star-half-o" aria-hidden="true"></i>
 										</span>
-									<?php 
-									} ?>
-								</div>
+									<?php
+									}?>
+								<?php 
+								}
+								for ($i=$total; $i<5;$i++) { ?>
+									<span>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+									</span>
+								<?php 
+								} ?>
 							</div>
 						</div>
 					</div>
-				<?php
-				}
-				?>
-			</div>
+				</div>
+			<?php
+			}
+			?>
+		</div>
 				<!-- map
 			================================================== -->
 			<div class="search-map" itemscope itemtype="https://schema.org/Place">
