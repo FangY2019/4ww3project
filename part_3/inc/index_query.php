@@ -1,35 +1,32 @@
 <?php
     include 'pdo.php';
+    ini_set("display_errors", 0);
 
     $test = 123;
     $name = '';
     $rows = [];
 
-    if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) { 
-        $name = $_GET['name'];
-        if($name == NULL){
-            $name='';
+    $name = $_GET['name'];
+    if($name == NULL){
+        $name='';
+    }
+    $rating = $_GET['stars'];
+    $result = getAllObjects($pdo, $name);
+    foreach($result as $row) {
+        $average_rank = getAvgRank($pdo, $row['id']);
+        if($average_rank >= $rating) {
+            $row['rating'] = $average_rank;
+            $rows[] = $row;
         }
-        $rating = $_GET['stars'];
-        $result = getObjectFromDatabaseByName($pdo, $name);
-        foreach($result as $row) {
-            $average_rank = getAvgRank($pdo, $row['id']);
-            if($average_rank >= $rating) {
-                $row['rating'] = $average_rank;
-                $rows[] = $row;
-            }
-        }
-        //print_r($rows);
-        
     }
     //closing the connection
     $pdo = null;
 
     //Get the object by the given id
-    function getObjectFromDatabaseByName($pdo, $name){ 
+    function getAllObjects($pdo, $name){ 
         $result = [];
         try {
-            $sql = "SELECT * FROM objects WHERE shopname like '%".$name."%'";
+            $sql = "SELECT * FROM objects";
             $result = $pdo->query($sql);
         } catch (PDOException $e) {            
             print "Error!: " . $e->getMessage() . "<br/>";
