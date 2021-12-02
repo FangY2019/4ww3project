@@ -51,7 +51,7 @@
 </head>
 
 <!-- when load the page, it will call loadMapToIndividualPage function to load the map to the page -->
-<body onload="loadMapToIndividualPage();">    
+<body onload="loadMapToIndividualPage(<?php echo $latitude?>, <?php echo $longitude?>);">    
     <div class="container">
         <!-- Begin Header and menu
 	================================================== -->
@@ -86,7 +86,7 @@
                         <!-- img with creative comons license, from https://images.app.goo.gl/y3xtUHUSn13LiotM8 -->
                         <div class="coffee-shop-img">
                             <picture>
-                               <img src = <?php echo $image_url?> alt="Coffee Shop" />
+                               <img src = <?php echo $image_url?>  alt="Coffee Shop" height= "310px" />
                                 <source srcset="img/coffee-shop-1-sma.jpg 320w,
                                     img/coffee-shop-1-mid.jpg 800w,
                                     img/coffee-shop-1.jpg 1200w" sizes="(min-width: 60rem) 80vw,
@@ -94,8 +94,8 @@
                             </picture>
                         </div>
                         <!-- Video provided by Videvo, downloaded from www.videvo.net  -->
-                        <div class="coffee-shop-video">
-                            <video controls style="width:100%">
+                        <div class="coffee-shop-video" >
+                            <video controls style="width:100%" height="310px">
                                 <source src=<?php echo $video_url?> />
                             </video>
                         </div>
@@ -116,22 +116,21 @@
                             <div class="rating">
                                 <!-- a star icon with filling, check the aveage ranking and show fill the star according to the average ranking -->
                                 <span>
-                                    <i <?php if($avg_ranking > 1){echo 'class="fa fa-star"';} else if($avg_ranking >= 0.5) {echo 'class="fa fa-star-half-o"';} 
+                                    <i <?php if($avg_ranking >= 1){echo 'class="fa fa-star"';} else if($avg_ranking >= 0.5) {echo 'class="fa fa-star-half-o"';} 
                                     else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                                 <span>
-                                    <i <?php if($avg_ranking > 2){echo 'class="fa fa-star"';} else if($avg_ranking >= 1.5){echo 'class="fa fa-star-half-o"';} 
+                                    <i <?php if($avg_ranking >= 2){echo 'class="fa fa-star"';} else if($avg_ranking >= 1.5){echo 'class="fa fa-star-half-o"';} 
                                      else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                                 <span>
-                                    <i <?php if($avg_ranking > 3){echo 'class="fa fa-star"';} else if($avg_ranking >= 2.5){echo 'class="fa fa-star-half-o"';} 
+                                    <i <?php if($avg_ranking >= 3){echo 'class="fa fa-star"';} else if($avg_ranking >= 2.5){echo 'class="fa fa-star-half-o"';} 
                                      else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
                                 <span>
-                                    <i <?php if($avg_ranking > 4){echo 'class="fa fa-star"';} else if($avg_ranking >= 3.5){echo 'class="fa fa-star-half-o"';} 
+                                    <i <?php if($avg_ranking >= 4){echo 'class="fa fa-star"';} else if($avg_ranking >= 3.5){echo 'class="fa fa-star-half-o"';} 
                                      else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
                                 </span>
-                                <!-- a star icon with half filling -->
                                 <span>
                                     <i <?php if($avg_ranking >= 5){echo 'class="fa fa-star"';} else if($avg_ranking >= 4.5){echo 'class="fa fa-star-half-o"';} 
                                      else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
@@ -189,115 +188,57 @@
                 <!-- Review section -->
                 <div class="review-lists margin-left-10">
                     <h1>Reviews</h1>
-                    <!-- first individual review, contains reviewer's name, rating, date and comments -->
-                    <div class="row margin-bottom-20">
-                        <!-- Review microdata -->
-                        <div itemscope itemtype="https://schema.org/Review">
-                            <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-                                <strong itemprop="name">Dale B.</strong>
-                            </div>
-                            <div class="flex-left">
-                                <div class="rating">
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <meta itemprop="reviewRating" content="4">
-                                <meta itemprop="datePublished" content="2021-10-04">
-                                &nbsp;2021-10-04
-                            </div>
-                            <span itemprop="reviewBody">Their coffee and baked items seemed yummy, and they had a wide
-                                variety
-                                of muffins.
-                                This place is great.
-                            </span>
+                    <!-- for each review in the array of $reviews, show the username, ranking, date and comments in the review -->
+                    <?php
+                        if(count($reviews) === 0){                            
+                            echo "<div> This is no reviews for this coffee shop!</div>";
+                        }else{
+                            foreach($reviews as $review){?>
+                                <div class="row margin-bottom-20">
+                                    <!-- Review microdata -->
+                                    <div itemscope itemtype="https://schema.org/Review">
+                                        <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                            <strong itemprop="name"> <?php echo $review['username']?></strong>
+                                        </div>
+                                        <div class="flex-left">
+                                            <div class="rating">
+                                                <span>
+                                                    <i <?php if($review['ranking'] >= 1){echo 'class="fa fa-star"';} else if($review['ranking'] >= 0.5) {echo 'class="fa fa-star-half-o"';} 
+                                                    else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <i <?php if($review['ranking'] >= 2){echo 'class="fa fa-star"';} else if($review['ranking'] >= 1.5){echo 'class="fa fa-star-half-o"';} 
+                                                    else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <i <?php if($review['ranking'] >= 3){echo 'class="fa fa-star"';} else if($review['ranking'] >= 2.5){echo 'class="fa fa-star-half-o"';} 
+                                                    else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <i <?php if($review['ranking'] >= 4){echo 'class="fa fa-star"';} else if($review['ranking'] >= 3.5){echo 'class="fa fa-star-half-o"';} 
+                                                    else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <i <?php if($review['ranking'] >= 5){echo 'class="fa fa-star"';} else if($review['ranking'] >= 4.5){echo 'class="fa fa-star-half-o"';} 
+                                                    else { echo 'class="fa fa-star-o"'; }?> aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                            <meta itemprop="reviewRating" content="4">
+                                            <meta itemprop="datePublished" content="2021-10-04">
+                                            &nbsp; <?php echo substr($review['created_on'], 0, 10)?>
+                                        </div>
+                                        <span itemprop="reviewBody">  <?php echo $review['comments']?>
+                                        </span>
 
-                        </div>
+                                    </div>
 
-                    </div>
-                    <!-- second individual review -->
-                    <div class="row margin-bottom-20">
-                        <div itemscope itemtype="https://schema.org/Review">
-                            <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-                                <strong itemprop="name">Erin L.</strong>
-                            </div>
-                            <div class="flex-left">
-                                <div class="rating">
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
                                 </div>
-                                <meta itemprop="reviewRating" content="5">
-                                <meta itemprop="datePublished" content="2021-10-04">
-                                &nbsp;2021-10-04
-                            </div>
-                            <span itemprop="reviewBody">Their coffee and baked items seemed yummy, and they had a wide
-                                variety
-                                of muffins.
-                                This place is great.
-                            </span>
-                        </div>
-                    </div>
 
-                    <!-- third individual review -->
-                    <div class="row margin-bottom-20">
-                        <div itemscope itemtype="https://schema.org/Review">
-                            <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-                                <strong itemprop="name">Katie P.</strong>
-                            </div>
-                            <div class="flex-left">
-                                <div class="rating">
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <meta itemprop="reviewRating" content="5">
-                                <meta itemprop="datePublished" content="2021-10-04">
-                                &nbsp;2021-10-04
-                            </div>
-                            <span itemprop="reviewBody">Their coffee and baked items seemed yummy, and they had a wide
-                                variety
-                                of muffins.
-                                This place is great.
-                            </span>
-                        </div>
-                    </div>
+                            <?php 
+                            }                        
+                        }                  
+                    ?>
+
                 </div>
             </div>
         </section>

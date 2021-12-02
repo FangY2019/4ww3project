@@ -1,17 +1,9 @@
 <?php
-
-    //database variables
-    //local server
-    $servername = 'localhost';                   
-    $username = 'root';
-    $password = '';
+    //EC2 database variables
+    $servername = 'ec2-3-142-111-3.us-east-2.compute.amazonaws.com';              
+    $username = 'admin';
+    $password = 'Mysql@1234';
     $dbname = '4ww3_project';
-
-    // //aws server 
-    // $servername = '3.142.111.3:3306';
-    // $username = 'root';
-    // $password = 'YEfang2021';
-    // $dbname = '4ww3_project';   
 
     // Declair a PDO object
     $pdo = NULL;

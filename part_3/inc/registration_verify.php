@@ -22,8 +22,6 @@
                         $input_country = htmlentities($_POST['country']);
                         $input_terms = htmlentities($_POST['terms']);
                         
-                        // create database if the database does not exist
-                        create_database($pdo, $dbname);
                         // create users table if the table does not exist
                         create_users_table($pdo);                        
                         //check if the user email exist in the database
@@ -52,24 +50,6 @@
     }
     //closing the connection
     $pdo = null;
-
-    //Create database if the database does not exist
-    function create_database($pdo, $dbname){ 
-        $is_successful = false;
-        try {    
-            //create a database if the database not exists
-            $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
-            $stmt = $pdo->prepare($sql);
-            if ($stmt->execute()) {
-                $is_successful = true;                        
-            }
-            $stmt = null;
-        } catch (PDOException $e) {
-            print "Error!: " . $e->getMessage() . "<br/>";
-            die();
-        }
-        return $is_successful;                      
-    }
 
     //Create table if the table does not exist
     function create_users_table($pdo){ 

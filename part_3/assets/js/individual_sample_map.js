@@ -16,8 +16,8 @@ function InitMap(mapid, lati, longi, zoom) {
     return mymap;
 }
 
-// Load the map to individual sample page and add an marker
-function loadMapToIndividualPage() {
+// Load the map to individual sample page and add an marker with the giving latitude and longtitude
+function loadMapToIndividualPage(latitude, longitude) {
     //Define a variable for the map in individual sample page
     var mapOfIndividualPage = InitMap("mapid", 43.25346, -79.87943, 12);
 
@@ -32,7 +32,7 @@ function loadMapToIndividualPage() {
     mapOfIndividualPage.on('click', onMapClick);
 
     //add a marker with the location of the coffee shop
-    var marker = new L.marker([43.25346, -79.87943])
+    var marker = new L.marker([latitude, longitude])
         .addTo(mapOfIndividualPage)
-        .bindPopup("<div><b> Durand Coffee</b> </div> <div>latitude:43.25346</div>  <div>Longitude:-79.87943</div>")
+        .bindPopup("<div><b> Durand Coffee</b> </div> <div>latitude:" + latitude + "</div>  <div>Longitude:"+ longitude + "</div>")
 }
