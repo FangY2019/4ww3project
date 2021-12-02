@@ -66,6 +66,7 @@
         <div class="form-group-lable-and-input">
           <label>Stars: </label>
           <select class="select-box" id="stars" name="stars">
+            <option value="0">All</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

@@ -1,5 +1,6 @@
 <?php
     include 'pdo.php';
+    ini_set("display_errors", 0);
 
     $name = '';
     $rows = [];
@@ -10,6 +11,7 @@
         $result = getObjectFromDatabaseByName($pdo, $name);
         foreach($result as $row) {
             if(getAvgRank($pdo, $row['id']) >= $rating) {
+                $row['rating'] = getAvgRank($pdo, $row['id']);
                 $rows[] = $row;
             }
         }

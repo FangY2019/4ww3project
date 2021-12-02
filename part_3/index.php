@@ -1,4 +1,5 @@
 <?php
+	include 'inc/search.php';
     session_start();
 ?>
 
@@ -64,168 +65,54 @@
 			<!-- End of Welcome section
 		================================================== -->
 
-			<!-- Sample Objects -->
-			<div class="obj-container">
-				<div class="objects">
+		<!-- Sample Objects -->
+		<div class="search-obj-container">
+			<?php foreach($rows as $row) { ?>
+				<div class="search-objects">
 					<a class="img-ref" href="individual_object.php">
 						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-						<img src="img/gallery/default.jpg" class="sample-img" alt="Coffee Shop Picture"/>
+						<img src= <?php echo 'https://4ww3projectbucket.s3.us-east-2.amazonaws.com/' .$row['image_url_key'] ?> class="sample-img" alt="Coffee Shop Picture"/>
 					</a>
 					<div class="description">
-						<h4 class="des-title">Durand Coffee</h4>
-						<p class="des-text">A great coffee shop in Hamilton downtown</p>
+						<h4 class="des-title"> <?php echo $row['shopname'] ?> </h4>
+						<p class="des-text"> <?php echo $row['shop_description'] ?> </p>
 						<div class="rating-container">
-								<div class="rating">
+							<div class="rating">
+								<?php 
+								$total = 0;
+								for ($i=1; $i<$row['rating'];$i++) { 
+									$total++;
+									?>
 										<!-- a star icon with filling -->
 										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
+											<i class="fa fa-star" aria-hidden="true"></i>
 										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
+									<?php
+									if($row['rating'] - $i < 1){
+										$total++;
+										?>
 										<!-- a star icon with half filling -->
 										<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
+											<i class="fa fa-star-half-o" aria-hidden="true"></i>
 										</span>
-								</div>
+									<?php
+									}?>
+								<?php 
+								}
+								for ($i=$total; $i<5;$i++) { ?>
+									<span>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+									</span>
+								<?php 
+								} ?>
+							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="objects">
-					<a class="img-ref" href="individual_object.php">
-						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-						<img src="img/gallery/default.jpg" class="sample-img" alt="Coffee Shop Picture"/>
-					</a>
-					<div class="description">
-						<h4 class="des-title">Second Fake Coffee Shop</h4>
-						<p class="des-text">This coffee shop is Nil.</p>
-						<div class="rating-container">
-								<div class="rating">
-										<!-- a star icon with filling -->
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<!-- a star icon with half filling -->
-										<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
-										</span>
-								</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="objects">
-					<a class="img-ref" href="individual_object.php">
-						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-						<img src="img/gallery/default.jpg" class="sample-img" alt="Coffee Shop Picture"/>
-					</a>
-					<div class="description">
-						<h4 class="des-title">Third Coffee Shop</h4>
-						<p class="des-text">This coffee shop is an empty set.</p>
-						<div class="rating-container">
-								<div class="rating">
-										<!-- a star icon with filling -->
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<!-- a star icon with half filling -->
-										<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
-										</span>
-								</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="objects">
-					<a class="img-ref" href="individual_object.php">
-						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-						<img src="img/gallery/default.jpg" class="sample-img" alt="Coffee Shop Picture"/>
-					</a>
-					<div class="description">
-						<h4 class="des-title">Super Expensive Coffee Shop</h4>
-						<p class="des-text">This coffee shop is really expensive.</p>
-						<div class="rating-container">
-								<div class="rating">
-										<!-- a star icon with filling -->
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<!-- a star icon with half filling -->
-										<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
-										</span>
-								</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="objects">
-					<a class="img-ref" href="individual_object.php">
-						<!-- img with no copy right, from https://unsplash.com/photos/XtUd5SiX464 -->
-						<img src="img/gallery/default.jpg" class="sample-img" alt="Coffee Shop Picture"/>
-					</a>
-					<div class="description">
-						<h4 class="des-title">Super Duper Fake Coffee Shop</h4>
-						<p class="des-text">This coffee shop is super fake.</p>
-						<div class="rating-container">
-								<div class="rating">
-										<!-- a star icon with filling -->
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<span>
-												<i class="fa fa-star" aria-hidden="true"></i>
-										</span>
-										<!-- a star icon with half filling -->
-										<span>
-												<i class="fa fa-star-half-o" aria-hidden="true"></i>
-										</span>
-								</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php
+			}
+			?>
+		</div>
     </main>
 
 
