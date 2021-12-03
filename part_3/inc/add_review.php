@@ -12,7 +12,8 @@
             if(create_review_table($pdo)){
                 //if save the review to database successfully, refresh the page
                 if(save_review($pdo, $object_id, $username, $ranking, $comments)){
-                    $url = "http://localhost/html/4ww3project/part_3/individual_object.php?id=$object_id";
+                    // $url = "http://localhost/4ww3project/part_3/individual_object.php?id=$object_id";
+                    $url = "https://fangy.app/4ww3project/part_3/individual_object.php?id=$object_id";
                     header('Location: ' .$url);  
                 }                                              
             }
@@ -40,8 +41,8 @@
                 //Create a table
                 $sql="CREATE TABLE review(
                     review_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    object_id INT(6) NOT NULL,
-                    username VARCHAR(100) NOT NULL,
+                    object_id INT(6) UNSIGNED NOT NULL REFERENCES objects(id),
+                    username VARCHAR(100) NOT NULL REFERENCES users(username),
                     ranking INT(6) NOT NULL,
                     comments VARCHAR(300) NOT NULL,
                     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP

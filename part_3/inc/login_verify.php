@@ -38,7 +38,8 @@
                                     setcookie('username', null, -1, "/");
                                 }                            
                                 //redirect to a page
-                                $url = "http://localhost/4ww3project/part_3/index.php";
+                                // $url = "http://localhost/4ww3project/part_3/index.php";
+                                $url = "https://fangy.app/4ww3project/part_3/index.php";
                                 header('Location: ' .$url);
                             }
                             //invalid user name and password, login failed

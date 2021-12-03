@@ -32,7 +32,9 @@
                 if(save_object($pdo, $shopname, $description, $latitude, $longitude)){
                     $object_id = get_object($pdo, $shopname, $latitude, $longitude);                    
                     //redirect to a page
-                    $url = "http://localhost/4ww3project/part_3/individual_object.php?id=$object_id";
+                    // $url = "http://localhost/4ww3project/part_3/individual_object.php?id=$object_id";
+                    $url = "https://fangy.app/4ww3project/part_3/individual_object.php?id=$object_id";
+                    
                     header('Location: ' .$url);  
                 }                                              
             }
@@ -61,8 +63,8 @@
                 //Create a table
                 $sql="CREATE TABLE objects(
                     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    shopname VARCHAR(100) NOT NULL,
-                    shop_description VARCHAR(300) NOT NULL UNIQUE,
+                    shopname VARCHAR(100) NOT NULL UNIQUE,
+                    shop_description VARCHAR(300) NOT NULL,
                     latitude DOUBLE NOT NULL,
                     longitude DOUBLE NOT NULL,
                     image_url_key VARCHAR(100) NOT NULL,

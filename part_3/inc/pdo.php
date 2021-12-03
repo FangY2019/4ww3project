@@ -1,9 +1,6 @@
 <?php
-    //EC2 database variables
-    $servername = 'ec2-3-142-111-3.us-east-2.compute.amazonaws.com';              
-    $username = 'admin';
-    $password = 'Mysql@1234';
-    $dbname = '4ww3_project';
+    // File includes EC2 database variables 
+    include 'env.php';
 
     // Declair a PDO object
     $pdo = NULL;

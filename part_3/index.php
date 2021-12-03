@@ -66,7 +66,7 @@
 							<div class="rating">
 								<?php 
 								$total = 0;
-								for ($i=1; $i<$row['rating'];$i++) { 
+								for ($i=1; $i<=$row['rating'];$i++) { 
 									$total++;
 									?>
 										<!-- a star icon with filling -->
@@ -74,7 +74,7 @@
 											<i class="fa fa-star" aria-hidden="true"></i>
 										</span>
 									<?php
-									if($row['rating'] - $i < 1){
+									if($row['rating'] - $i < 1 && $row['rating'] - $i > 0){
 										$total++;
 										?>
 										<!-- a star icon with half filling -->
