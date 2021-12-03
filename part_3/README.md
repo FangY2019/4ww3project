@@ -13,12 +13,14 @@ https://github.com/taoh4/4ww3project/tree/main/part_3
 * Member 1: Fang Ye - yef10, 400273067
 * Member 2: Haoyang Tao - taoh4, 400171589
 
-### c. Notes
-**1. sample account to log in**
+### d. Notes
 
-username:  user01
 
-password:　AAAaaa
+**1. Page such as submission_object will be shown after the users login; pages such as registration and login will be hidden after the users login**
+
+**2. Sample account to log in**
+* username:  user01
+* password:　AAAaaa
 
 
 
