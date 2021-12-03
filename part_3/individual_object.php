@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'inc/individual_object_getdata.php';
     include 'inc/header.php';
 	include 'inc/footer.php';
@@ -49,7 +50,7 @@
    crossorigin=""></script>
    <!-- External JavaScript -->
    <script type="text/javascript" src="assets/js/individual_sample_map.js"></script>
-
+   <script type="text/javascript" src="assets/js/add_review.js"></script>
 </head>
 
 <!-- when load the page, it will call loadMapToIndividualPage function to load the map to the page -->
@@ -67,9 +68,9 @@
 
         <!-- Begin Body content
 	================================================== -->
-        <section>
+    <section>
             <div class="individual-obj-container">
-                <div>
+                <div >
                     <div>
                         <!-- img with creative comons license, from https://images.app.goo.gl/y3xtUHUSn13LiotM8 -->
                         <div class="coffee-shop-img">
@@ -128,9 +129,51 @@
                                 &nbsp;&nbsp;<strong><?php echo count($reviews)?> reviews</strong>
                             </div>
                         </div>
-                        <!-- Add review button -->
+                        <!-- 
+                            Add review button, when click the button of Write a Review, show the form; when click cancel button, hidden the review form
+                            Valide the form using javascript
+                            Set the value of ranking based on the star icons the user clicks
+                        -->
                         <div class="btn-icon-and-text margin-bottom-20 btn">
-                            <div><i class="fa fa-star-o"></i> Write a Review</div>
+                            <div onclick = <?php if(!isset($_SESSION['valid'])){echo "window.location.href='./login.php'";} else{echo "showForm()";}?>><i class="fa fa-star-o"></i> Write a Review</div>
+                        </div>
+                        <!--  add review form -->
+                        <div id="review-form" hidden>
+                            <form onsubmit="return validateReviewForm()" method="post" action="inc/add_review.php">
+                                <div class="rating">
+                                    <span onclick = "setRanking1()">
+                                        <i id="rating1" class="fa fa-star-o" aria-hidden="true"></i>
+                                    </span>
+                                    <span onclick = "setRanking2()">
+                                        <i id="rating2" class="fa fa-star-o" aria-hidden="true"></i>
+                                    </span>
+                                    <span onclick = "setRanking3()">
+                                        <i id="rating3" class="fa fa-star-o" aria-hidden="true"></i>
+                                    </span>
+                                    <span onclick = "setRanking4()">
+                                        <i id="rating4" class="fa fa-star-o" aria-hidden="true"></i>
+                                    </span>
+                                    <span onclick = "setRanking5()">
+                                        <i id="rating5" class="fa fa-star-o" aria-hidden="true"></i>
+                                    </span>
+                                    <span>Select your rating</span>
+                                </div>
+                                <!-- a text area to stretch to fit its content -->
+                                <div><textarea autocomplete="comments" id="comments" name="comments"
+                                    oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                                    placeholder="e.g. Their coffee and baked items seemed yummy, and they had a wide variety of muffins."></textarea></div>
+                                <div id="comments-error"></div>
+                                <div>    
+                                    <!-- hidden inputs for posting the object id and the username of the loggin user  -->
+                                    <input type="hidden" name="object-id" value=<?php echo $object_id?> />
+                                    <input type="hidden" name="username" value=<?php echo $_SESSION['username']?> />
+                                    <input id="value-of-ranking" type="hidden" name="ranking" value="0" />
+                                </div>
+                                <div style="margin-bottom: 20px;">
+                                    <input class="btn" type="submit" value="Submit" style="margin-right: 20px;">
+                                    <input class="btn" type="button" value="Cancel" onclick = "hiddenForm()">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

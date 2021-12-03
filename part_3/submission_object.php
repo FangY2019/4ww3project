@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'inc/submission_save.php';
     include 'inc/header.php';
 	include 'inc/footer.php';

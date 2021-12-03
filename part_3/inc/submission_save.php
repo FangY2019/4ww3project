@@ -1,12 +1,7 @@
 <?php
-    // echo "<pre>";
-    // print_r($_FILES);
-    // echo "<br/>";
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "<br/>";
-
+    // File includes key and secret of amazon S3 buckets 
     include 'env.php';
+    // PDO object 
     include 'pdo.php';
     //Include the SDK using the ZIP file run the SDK
     include 'assets/aws/aws-autoloader.php';
@@ -30,20 +25,8 @@
             $shopname = htmlentities($_POST['txt-shopname']);
             $description = htmlentities($_POST['txt-description']);
             $latitude = htmlentities($_POST['txt-latitude']);
-            $longitude = htmlentities($_POST['txt-longitude']);
-            // $image = $_FILES['image-upload']['name'];
-            // $video = $_FILES['video-upload']['name'];            
-                        
+            $longitude = htmlentities($_POST['txt-longitude']);       
             //check if the table and object exist in the database
-            // echo "create_objects_table: ";
-            // print(create_objects_table($servername, $username, $password, $dbname));
-            // echo "<br/>";
-            // echo "<br/>";
-            // echo "is_exist: ";
-            // print(is_exist($servername, $username, $password, $dbname, $_POST['txt-shopname']));
-            // echo "<br/>";
-            // echo "<br/>";
-            // exit();
             if((create_objects_table($pdo)) && (!is_exist($pdo, $shopname))){
                 //if the object does not exist, save the object to database and rederect to the login page, else stay in the registration page
                 if(save_object($pdo, $shopname, $description, $latitude, $longitude)){
@@ -60,8 +43,7 @@
         $errors['object_submission_status_message'] = 'empty';
     }
     //closing the connection
-    $pdo = null;            
-
+    $pdo = null;        
 
     //Create table if the table does not exist
     function create_objects_table($pdo){ 
@@ -74,12 +56,6 @@
             $stmt = $pdo ->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetch();
-            // echo "type of result: ";
-            // print(gettype($result));
-            // echo "<br/>type of stmt: ";
-            // print(gettype($stmt));
-            // echo "<br/>";
-            // echo "<br/>";
             //if not exists, create a table
             if($result === false){
                 //Create a table
@@ -119,16 +95,6 @@
             $stmt = $pdo->prepare('SELECT * FROM `objects` WHERE `shopname` = :shopname ');
             $stmt->bindValue(':shopname', $shopname);
             $result = $stmt->execute();
-            // echo "type of result: ";
-            // print(gettype($result));
-            // echo "<br/>type of stmt: ";
-            // print(gettype($stmt));
-            // echo "<br/>";
-            // echo "<pre>";
-            // print_r($stmt);
-            // echo "<br/>";
-            // echo "<br/>object exist - condition: ";
-            // print(($result == true) && ($stmt->rowCount() > 0));
             //Check if the object exists
             if(($result == true) && ($stmt->rowCount() > 0)){
                 GLOBAL $errors;
@@ -143,15 +109,13 @@
         return $is_exist;
     }
 
-
     //Insert the objec to the database
     function save_object($pdo, $shopname, $description, $latitude, $longitude){ 
         //variable to check if the object is saved in the database successfully
         $is_successful = false;
         GLOBAL $bucketName;
         GLOBAL $IAM_KEY;
-        GLOBAL $IAM_SECRET;        
-        
+        GLOBAL $IAM_SECRET;     
         //Create a S3Client
         $s3 = new S3Client([
             'region'  => 'us-east-2',
@@ -162,9 +126,6 @@
             ]
         ]);
         //Hash the filename using SHAS256 hashing algorithm
-        // $salt = bin2hex(random_bytes(20));
-        // $keyNameOfImage = hash('sha256', basename($_FILES['image-upload']['name']) . $salt); 
-        // $keyNameOfVideo = hash('sha256', basename($_FILES['video-upload']['name']) . $salt); 
         //Generate a random prefix for the key of file
         $random_name = bin2hex(random_bytes(10));
         $keyNameOfImage = $random_name . basename($_FILES['image-upload']['name']); 
@@ -194,8 +155,6 @@
             $stmt = $pdo->prepare($sql);
             $values = [':shopname' => $shopname, ':shopdescription' => $description, ':latitude' => $latitude, ':longitude' => $longitude, ':keyNameOfImage' => $keyNameOfImage, ':keyNameOfVideo' => $keyNameOfVideo];
             $result = $stmt->execute($values);
-            // $stmt = $dbh->prepare('SELECT * FROM `objects` WHERE `shopname` = :shopname ');
-            // $stmt->bindValue(':shopname', $shopname);
             if($result){
                   $is_successful = true;
             }else{

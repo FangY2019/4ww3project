@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'inc/registration_verify.php';
     include 'inc/header.php';
 	include 'inc/footer.php';

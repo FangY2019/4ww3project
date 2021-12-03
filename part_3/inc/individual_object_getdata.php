@@ -1,7 +1,7 @@
 <?php
-
     include 'pdo.php';
-
+    // variables for the attributesof a coffee shop
+    $object_id = 0;
     $shopname = '';
     $description = '';
     $latitude = 0;
@@ -9,6 +9,7 @@
     $image_url = '';
     $video_url = '';
     $avg_ranking = 0;
+    // a list of reviews for a object
     $reviews = [];
 
     if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) { 

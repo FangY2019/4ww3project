@@ -1,8 +1,8 @@
 <?php
+    session_start();
 	include 'inc/header.php';
 	include 'inc/footer.php';
 	include 'inc/index_query.php';
-    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,7 @@
     <main>
       <header class="welcome-section">
 				<div class="title">
-				<?php echo $_SESSION['username'] . ","; ?><span>Welcome to</span>
+				<?php if(isset($_SESSION['valid'])){echo $_SESSION['username'] . ",";} ?><span>Welcome to</span>
 					<span class="colored-title">Seek Coffee</span>
 			</div>
       </header>
