@@ -1,11 +1,10 @@
-
 <?php
-
 $submissionMenue = '';
 $registrationMenu = '';
 $loginMenu = '';
 $logOutMenu = '';
 
+//If the user login , hidden the Registration and Login; else, hidden Submission and Logout
 if(isset($_SESSION['valid'])){
     $submissionMenue = "<li class=\"nav-li\"><a href=\"submission_object.php\" class=\"nav-link\">Submission</a></li>";
     $registrationMenu = '';

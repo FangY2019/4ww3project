@@ -128,10 +128,10 @@
             ]
         ]);
         //Hash the filename using SHAS256 hashing algorithm
-        //Generate a random prefix for the key of file
+        //Generate a random name for the key of file
         $random_name = bin2hex(random_bytes(10));
-        $keyNameOfImage = $random_name . basename($_FILES['image-upload']['name']); 
-        $keyNameOfVideo = $random_name . basename($_FILES['video-upload']['name']);
+        $keyNameOfImage = $random_name .".jpg"; 
+        $keyNameOfVideo = $random_name . ".mp4";
         // Temp file location
         $fileImage = $_FILES["image-upload"]['tmp_name'];
         $fileVideo = $_FILES["video-upload"]['tmp_name'];

@@ -107,7 +107,7 @@
 		<div class="end-of-page">
 			<div class="end-of-page-text">
 				<h3 class="des-title">That's the end of the home page!</h3>
-				<!-- <p> Didn't find your loved one? <a href= "submission_object.php"> Add it!</a></p> -->
+				<!-- If it is a valid session, direct user to object submission page, else, to login page -->
 				<p> Didn't find your loved one? <a href= <?php if(isset($_SESSION['valid'])){echo "submission_object.php";}else {echo "login.php";}?>> Add it!</a></p>
 
 				

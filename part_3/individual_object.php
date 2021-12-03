@@ -135,6 +135,7 @@
                             Set the value of ranking based on the star icons the user clicks
                         -->
                         <div class="btn-icon-and-text margin-bottom-20 btn">
+                            <!-- If it is a invalid session, direct user to login page, else show the form for submitting review -->
                             <div onclick = <?php if(!isset($_SESSION['valid'])){echo "window.location.href='./login.php'";} else{echo "showForm()";}?>><i class="fa fa-star-o"></i> Write a Review</div>
                         </div>
                         <!--  add review form -->

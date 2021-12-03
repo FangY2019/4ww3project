@@ -113,9 +113,6 @@
                 $errors['register_status_message'] = 'is_username_exist';
                 $is_exist = true;
             }
-            // print($is_exist);
-            // print_r( $errors);
-            // exit();
             $stmt = null;       
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";
@@ -133,7 +130,6 @@
             $salt = bin2hex(random_bytes(20));
             $passwordhash = hash('sha256', $input_password . $salt);
             //Insert user data into users table
-            // $sql="INSERT INTO users(username, email, salt, passwordhash, country) VALUES (\"$input_username\", \"$input_email\", \"$salt\", \"$passwordhash\", \"$input_country\")";
             $sql="INSERT INTO users(username, email, salt, passwordhash, country) VALUES (:username, :email, :salt, :passwordhash, :country)";
             $stmt = $pdo->prepare($sql);
             $values=[':username' => $input_username, ':email' => $input_email, ':salt' => $salt, ':passwordhash'=> $passwordhash, ':country' => $input_country];

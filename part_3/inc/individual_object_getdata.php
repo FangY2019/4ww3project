@@ -64,7 +64,6 @@
     function getAvgRank($pdo, $object_id){ 
         $avg_rank = 0;
         try {
-            //Check if the email exist
             $sql = "SELECT AVG(ranking) AS avg_ranking FROM review WHERE `object_id` = :objectid";
             $stmt = $pdo->prepare($sql);
             $values = [':objectid' => $object_id];
