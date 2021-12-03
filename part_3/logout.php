@@ -6,6 +6,7 @@
     unset($_SESSION['username']);
     unset($_SESSION['valid']);
 
-    $url ="http://localhost/4ww3project/part_3/index.php";
+    // $url ="http://localhost/4ww3project/part_3/index.php";
+    $url ="https://fangy.app/4ww3project/part_3/index.php";
     header('Location: ' .$url);
 ?>
