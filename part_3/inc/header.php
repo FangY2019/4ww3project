@@ -1,15 +1,18 @@
 
 <?php
 
+$submissionMenue = '';
 $registrationMenu = '';
 $loginMenu = '';
 $logOutMenu = '';
 
 if(isset($_SESSION['valid'])){
+    $submissionMenue = "<li class=\"nav-li\"><a href=\"submission_object.php\" class=\"nav-link\">Submission</a></li>";
     $registrationMenu = '';
     $loginMenu = '';
     $logOutMenu = "<li class=\"nav-li\"><a href=\"logout.php\" class=\"nav-link\">Logout</a></li>";
 }else{
+    $submissionMenue = '';
     $registrationMenu = "<li class=\"nav-li\"><a href=\"registration.php\" class=\"nav-link\">Registration</a></li>";
     $loginMenu = "<li class=\"nav-li\"><a href=\"login.php\" class=\"nav-link\">Login</a></li>";
     $logOutMenu = '';
@@ -26,8 +29,8 @@ $header =
     <nav class=\"nav-bar\">
         <ul class=\"nav-ul\">
         <li class=\"nav-li\"><a href=\"index.php\" class=\"nav-link\">Home</a></li>
-        <li class=\"nav-li\"><a href=\"search.php?name=&stars=\" class=\"nav-link\">Search</a></li>
-        <li class=\"nav-li\"><a href=\"submission_object.php\" class=\"nav-link\">Submission</a></li>" .
+        <li class=\"nav-li\"><a href=\"search.php?name=&stars=\" class=\"nav-link\">Search</a></li>" .
+        $submissionMenue .
         $registrationMenu .
         $loginMenu .
         $logOutMenu .    
