@@ -43,8 +43,8 @@
 ================================================== -->
     <main>
       <header class="welcome-section">
-				<div class="title">
-				<?php if(isset($_SESSION['valid'])){echo $_SESSION['username'] . ",";} ?><span>Welcome to</span>
+				<div class="title"><span style="color:orangered;">
+				<?php if(isset($_SESSION['valid'])){echo $_SESSION['username'] . ",  ";} ?></span><span>Welcome to</span>
 					<span class="colored-title">Seek Coffee</span>
 			</div>
       </header>
