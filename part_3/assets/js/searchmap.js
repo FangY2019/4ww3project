@@ -1,5 +1,7 @@
+var parameters;
+
 //Inialize and load the Leaflet map
-function loadMap(x = 43.25966, y = -79.91823, z = 13){
+function loadMap(param, x = 43.25966, y = -79.91823, z = 13, local=false){
     //Initalize the map and set its view to mcmaster and a zoom level
     var mymap = L.map('search-map-id').setView([x, y], z);
     //add a tile layer to add to our map
@@ -11,14 +13,15 @@ function loadMap(x = 43.25966, y = -79.91823, z = 13){
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoieWVmMTAiLCJhIjoiY2t2aGlqdjh4MmhzdjJwbm8xeDdnMTJ3dyJ9.BOusRdioCyDRhIhxuHlWGg'
     }).addTo(mymap);
-    //add a marker with the location of the coffee shop
-    var marker = new L.marker([43.25346,-79.87943])
-                    .bindPopup("<a class=\"img-ref\" href=\"individual_sample.html\"><img src=\"img/gallery/default.jpg\" class=\"sample-img-popup\" alt=\"Coffee Shop Picture\"/> <h3 class=\"des-text\">Here is Durand Coffee</h3></a><br>", {maxWidth:200})
-                    .addTo(mymap);
-    //add another marker with the location of the coffee shop
-    var marker2 = new L.marker([43.25326,-79.89943])
-                    .bindPopup("<a class=\"img-ref\" href=\"individual_sample.html\"><img src=\"img/gallery/default.jpg\" class=\"sample-img-popup\" alt=\"Coffee Shop Picture\"/> <h3 class=\"des-text\">Here is Second Fake Coffee Shop</h3></a><br>", {maxWidth:200})
-                    .addTo(mymap);
+
+    //add markers with the location of coffee shops
+    for(var i = 0; i < param.length; i++) {
+      var markers=[];
+      markers.push(new L.marker([param[i][3], param[i][4]])
+                  .bindPopup("<a class=\"img-ref\" href=\"individual_object.php?id=" + param[i][0] + "\"><img src=\"https://4ww3projectbucket.s3.us-east-2.amazonaws.com/" + param[i][5] + "\" class=\"sample-img-popup\" alt=\"Coffee Shop Picture\"/> <h3 class=\"des-text\">Here is " + param[i][1] + " </h3></a><br>", {maxWidth:200})
+                  .addTo(mymap));
+      console.log([param[i][3], param[i][4]]);
+    }
 }
 
 
@@ -33,7 +36,7 @@ function success(pos) {
   console.log('More or less ' + crd.accuracy + ' meters.');
 
   //initialize the map with coordinates
-  loadMap(crd.latitude, crd.longitude, 13);
+  loadMap(parameters, crd.latitude, crd.longitude, 13, true);
 }
 
 //get position failed
@@ -41,14 +44,16 @@ function error(err) {
   //alert the user location service is blocked.
   alert("Why are you doing this to me?\nAccessing location failed, is it blocked?");
   //load map with default parameters.
-  loadMap();
+  loadMap(parameters);
 }
 
 function getLoc() {
   return navigator.geolocation.getCurrentPosition(success, error);
 }
 
-function Initalize() {
+function Initalize(param) {
+  console.log(param);
+  parameters = param;
   //retrieve parameters from get request
   var queryDict = {};
   location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]});
@@ -57,5 +62,5 @@ function Initalize() {
     getLoc();
     return;
   }
-  loadMap();
+  loadMap(parameters);
 }
